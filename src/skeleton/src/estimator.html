@@ -1,0 +1,24 @@
+<template>
+  <section class="au-animate">
+    <h2>${heading}</h2>
+    <form role="form" submit.delegate="submit()">
+      <div class="form-group">
+        <label for="fn">Optimistic (h)</label>
+        <input type="number" value.bind="optimisticEstimate" class="form-control" id="fn" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label for="ln">Most Likely (h)</label>
+        <input type="number" value.bind="mostLikelyEstimate" class="form-control" id="ln" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label for="ln">Pessimistic (h)</label>
+        <input type="number" value.bind="pessimisticEstimate" class="form-control" id="ln" placeholder="0">
+      </div>
+      <div class="form-group">
+        <label>PERT (h)</label>
+        <p class="help-block">${pertEstimateText}</p>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </section>
+</template>
