@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using skeleton.Models;
+using estimator.Models;
 
-namespace skeleton.Controllers
+namespace estimator.Controllers
 {
     public class MetricsContoller : Controller
     {

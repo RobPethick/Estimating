@@ -7,10 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2020AC68-78E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7C5F4AE-7354-4122-89A5-2E1ADF8ADC10}"
 	ProjectSection(SolutionItems) = preProject
-		src\skeleton\.gitignore = src\skeleton\.gitignore
+		estimator\.gitignore = estimator\.gitignore
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "skeleton", "src\skeleton\skeleton.csproj", "{4AAFD9A8-008C-4ADF-8089-90C6ED4B96E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "estimator", "estimator\estimator.csproj", "{4AAFD9A8-008C-4ADF-8089-90C6ED4B96E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

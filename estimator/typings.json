@@ -1,5 +1,5 @@
 {
-  "name": "aurelia-skeleton-navigation-typescript-aspnetcore",
+  "name": "aurelia-estimator-navigation-typescript-aspnetcore",
   "dependencies": {
     "aurelia-binding": "github:aurelia/binding",
     "aurelia-bootstrapper": "github:aurelia/bootstrapper",

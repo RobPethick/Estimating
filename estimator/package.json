@@ -1,5 +1,5 @@
 {
-  "name": "aurelia-skeleton-navigation-typescript-netcoreapp",
+  "name": "aurelia-estimator-navigation-typescript-netcoreapp",
   "version": "1.1.2",
   "private": true,
   "devDependencies": {
@@ -40,7 +40,7 @@
   "keywords": [
     "aurelia",
     "navigation",
-    "skeleton",
+    "estimator",
     "typescript",
     "vscode"
   ],

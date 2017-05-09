@@ -7,7 +7,7 @@ using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
 
-namespace skeleton
+namespace estimator
 {
     public class Startup
     {
@@ -33,7 +33,7 @@ namespace skeleton
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-               // builder.AddUserSecrets("skeleton-typescript-aspnetcore-E0EE09F7-ABEB-45D0-A957-2163DB134112");
+               // builder.AddUserSecrets("estimator-typescript-aspnetcore-E0EE09F7-ABEB-45D0-A957-2163DB134112");
 
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);

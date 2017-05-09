@@ -10,6 +10,7 @@ export class Estimator implements IEstimator{
   public optimisticEstimate = 0;
   public mostLikelyEstimate = 0;
   public pessimisticEstimate = 0;
+  public metrics = [{name: "Analysis", value: 3}, {name: "Testing", value:5}]
 
   // @computedFrom('firstName', 'lastName')
   get pertEstimateText() {
@@ -24,15 +25,4 @@ export class Estimator implements IEstimator{
     alert(`Welcome, ${this.pertEstimate}!`);
   }
 
-  public canDeactivate() {
-    //if (this.fullName !== this.previousValue) {
-      return confirm('Are you sure you want to leave?');
-    //}
-  }
-}
-
-export class UpperValueConverter {
-  public toView(value) {
-    return value && value.toUpperCase();
-  }
 }

@@ -1,4 +1,4 @@
-namespace skeleton.Models
+namespace estimator.Models
 {
     internal class Metrics
     {
