@@ -12,7 +12,11 @@ export class Estimator {
   }
 
   public pertEstimate() {
-    return (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3;
+    let pertEstimate = (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3
+    this.metrics.forEach(metric => {
+      metric.pertValue = pertEstimate;
+    });
+    return pertEstimate;
   }
 
   public submit() {
