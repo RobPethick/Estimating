@@ -1,4 +1,5 @@
 <template>
+  <require from="./metric"></require>
   <section class="au-animate">
     <h2>${heading}</h2>
     <div class="pertEstimate">
@@ -19,12 +20,8 @@
         <p class="help-block">${pertEstimateText}</p>
       </div>
     </div>
-    <div class="metrics" repeat.for="metric of metrics">
-      <metric data="metric">
-    </div>
-    <div class="metrics" repeat.for="metric of metrics">
-      <div>${metric.name}</div>
-      <div>${metric.value}</div>
+    <div class="metricsList" repeat.for="metric of metrics">
+      <metric metric.bind="metric"></metric>
     </div>
   </section>
 </template>
