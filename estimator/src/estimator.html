@@ -23,5 +23,9 @@
     <div class="metricsList" repeat.for="metric of metrics">
       <metric metric.bind="metric"></metric>
     </div>
+    <button class="btn btn-primary" click.trigger="addMetric()">Add new metric</button>
+    <div>
+      Total Time: ${totalTime}
+    </div>
   </section>
 </template>

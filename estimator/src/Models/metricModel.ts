@@ -9,6 +9,6 @@ export class MetricModel{
     }
 
     get metricValue(){
-        return this.percentage * this.pertValue;
+        return this.percentage * this.pertValue / 100;
     } 
 }

@@ -5,7 +5,7 @@ export class Estimator {
   public optimisticEstimate = 0;
   public mostLikelyEstimate = 0;
   public pessimisticEstimate = 0;
-  public metrics = [new MetricModel("Analysis", 0.2), new MetricModel("Testing", 0.5)]
+  public metrics = [new MetricModel("Analysis", 20), new MetricModel("Testing", 50)]
 
   get pertEstimateText() {
     return this.pertEstimate().toFixed(2).toString();
@@ -19,6 +19,17 @@ export class Estimator {
     return pertEstimate;
   }
 
+  get totalTime(){
+    var totalTime = this.pertEstimate();
+    this.metrics.forEach(metric => {
+      totalTime += metric.metricValue
+    });
+    return totalTime.toFixed(2);
+  }
+
+  public addMetric(){
+    this.metrics.push(new MetricModel("New Metric", 0));
+  }
   public submit() {
     alert(`Welcome, ${this.pertEstimate}!`);
   }

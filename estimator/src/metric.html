@@ -1,6 +1,6 @@
 <template>
-    <div>${metric.name}</div>
+    <input value.bind="metric.name"></input>
+    <input type="range" value.bind="metric.percentage"> </input>
     <div>${metric.percentage}</div>
-    <div>${metric.pertValue}</div>
     <div>${metric.metricValue}</div>
 </template>
