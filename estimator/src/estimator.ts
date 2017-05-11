@@ -8,10 +8,10 @@ export class Estimator {
   public metrics = [new MetricModel("Analysis", 20), new MetricModel("Testing", 50)]
 
   get pertEstimateText() {
-    return this.pertEstimate().toFixed(2).toString();
+    return this.pertEstimate.toFixed(2).toString();
   }
 
-  public pertEstimate() {
+  get pertEstimate() {
     let pertEstimate = (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3
     this.metrics.forEach(metric => {
       metric.pertValue = pertEstimate;
@@ -20,11 +20,26 @@ export class Estimator {
   }
 
   get totalTime(){
-    var totalTime = this.pertEstimate();
+    var totalTime = this.pertEstimate;
     this.metrics.forEach(metric => {
       totalTime += metric.metricValue
     });
     return totalTime.toFixed(2);
+  }
+
+  get nonZeroMetrics(){
+    return this.metrics.every(metric => {return metric.metricValue != 0;})
+  }
+  
+  get descriptionText(){
+    var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
+    var metricsLine = "This contains: Development [" + this.pertEstimate + "]"
+    this.metrics.slice(0, -1).forEach(metric=>{
+      metricsLine += ", " + metric.name + " [" + metric.metricValue + "]"
+    })
+    var lastMetric = this.metrics.slice(-1)[0];
+    metricsLine += " and " + lastMetric.name + " [" + lastMetric.metricValue + "]." 
+    return introLine + metricsLine;
   }
 
   public addMetric(){
