@@ -1,12 +1,18 @@
 import {MetricModel} from './Models/MetricModel';
+import {MetricService} from './Services/MetricService';
+import {autoinject} from 'aurelia-framework';
 
+@autoinject
 export class Estimator {
   public heading = 'Welcome to the Aurelia Navigation App!';
   public optimisticEstimate = 0;
   public mostLikelyEstimate = 0;
   public pessimisticEstimate = 0;
-  public metrics = [new MetricModel("Analysis", 20), new MetricModel("Testing", 50)]
+  public metrics = [new MetricModel("Analysis", 20), new MetricModel("Testing", 50)];
 
+  constructor(private metricService: MetricService){
+    this.metrics = metricService.getDefaultMetrics();
+  }
   get pertEstimateText() {
     return this.pertEstimate.toFixed(2).toString();
   }
