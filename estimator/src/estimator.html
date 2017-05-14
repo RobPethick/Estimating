@@ -27,7 +27,8 @@
     <div>
       Total Time: ${totalTime}
     </div>
-    <div textcontent.bind="descriptionText">
-    </div>
+    <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
+    </textarea>
+    <button click.trigger="copyTextToClipboard()">Copy</button>
   </section>
 </template>

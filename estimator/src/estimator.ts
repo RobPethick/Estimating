@@ -51,6 +51,12 @@ export class Estimator {
   public addMetric(){
     this.metrics.push(new MetricModel("New Metric", 0));
   }
+
+  public copyTextToClipboard(){
+    var textArea = document.querySelector("#finalText") as HTMLTextAreaElement;
+    textArea.select();
+    document.execCommand('copy');
+  }
   public submit() {
     alert(`Welcome, ${this.pertEstimate}!`);
   }
