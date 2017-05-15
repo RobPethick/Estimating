@@ -22,6 +22,7 @@
     </div>
     <div class="metricsList" repeat.for="metric of metrics">
       <metric metric.bind="metric"></metric>
+      <button click.trigger="removeMetric(metric)"><i class="fa fa-trash"/></button>
     </div>
     <button class="btn btn-primary" click.trigger="addMetric()">Add new metric</button>
     <div>
