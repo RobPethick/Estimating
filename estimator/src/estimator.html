@@ -33,7 +33,7 @@
           <span class="metricHeaderValue col-md-1">Value</span>
           <span class="metricHeaderPercentage col-md-1">Percentage</span>
           <div class="col-md-3"> </div>
-          <span class="metricHeaderDefaultPercentage col-md-2">Default Percentage</span>
+          <span class="metricHeaderDefaultPercentage col-md-3">Default Percentage</span>
         </div>
         <div repeat.for="metric of metrics">
           <div class="row form-group">
@@ -49,12 +49,16 @@
           <h4 class="help-block">${totalTime}</h4>
         </div>
       </section>
+      <hr/>
+      <section>
+        <h3>Customer Rates</h3>
+      </section>
     </div>
     <div class="col-lg-6">
       <div class="resultsSection">
         <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
         </textarea>
-        <button click.trigger="copyTextToClipboard()">Copy</button>
+        <button class="btn btn-primary" click.trigger="copyTextToClipboard()">Copy</button>
       </div>
     </div>
   </section>
