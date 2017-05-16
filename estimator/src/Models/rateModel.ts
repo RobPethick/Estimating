@@ -1,9 +1,11 @@
 export class RateModel{
+    public code;
     public name;
     public ratePerDay;
     public originalRatePerDay;
 
-    constructor(name, ratePerDay){
+    constructor(code, name, ratePerDay){
+        this.code = code;
         this.name = name;
         this.ratePerDay = ratePerDay;
         this.originalRatePerDay = ratePerDay;
