@@ -13,4 +13,8 @@ export class MetricModel{
     get metricValue(){
         return this.percentage * this.pertValue / 100;
     } 
+
+    get trimmedMetricValue(){
+        return this.metricValue.toFixed(2);
+    }
 }

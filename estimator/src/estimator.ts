@@ -43,10 +43,10 @@ export class Estimator {
     if(this.nonZeroMetrics.length > 0){
       metricsLine = "This contains: Development [" + this.pertEstimateText + "]"
       this.nonZeroMetrics.slice(0, -1).forEach(metric=>{
-        metricsLine += ", " + metric.name + " [" + metric.metricValue + "]"
+        metricsLine += ", " + metric.name + " [" + metric.trimmedMetricValue + "]"
       })
       var lastMetric = this.nonZeroMetrics.slice(-1)[0];
-      metricsLine += " and " + lastMetric.name + " [" + lastMetric.metricValue + "]." 
+      metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]." 
     }
     return introLine + metricsLine;
   }

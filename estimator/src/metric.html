@@ -2,7 +2,7 @@
     <div class="col-md-2">
         <input class="metricName form-control" value.bind="metric.name"></input>
     </div>
-    <div class="metricValue col-md-1">${metric.metricValue}</div>
+    <div class="metricValue col-md-1">${metric.trimmedMetricValue}</div>
     <div class="metricPercent col-md-1">${metric.percentage}%</div>
     <div class="metricRange col-md-3">
         <input min="0" max="150" type="range" value.bind="metric.percentage"> </input>
