@@ -51,9 +51,11 @@
       </section>
     </div>
     <div class="col-lg-6">
-      <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
-      </textarea>
-      <button click.trigger="copyTextToClipboard()">Copy</button>
+      <div class="resultsSection">
+        <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
+        </textarea>
+        <button click.trigger="copyTextToClipboard()">Copy</button>
+      </div>
     </div>
   </section>
 </template>

@@ -2,11 +2,17 @@ textarea {
   border: none;
 }
 
+.resultsSection{
+
+  position: fixed;
+  top:50%;
+  transform: translate(0, -50%);
+}
+
 #finalText{
   min-width: 600px;
   min-height: 100px;
   width: auto;
-  overflow: overlay;
 }
 
 [class^="metric"]{
