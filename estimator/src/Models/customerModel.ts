@@ -1,6 +1,8 @@
+import {RateModel} from '../Models/RateModel';
+
 export class CustomerModel{
     public name;
-    public rates;
+    public rates = new Array<RateModel>();
 
     constructor(name, rates){
         this.name = name;

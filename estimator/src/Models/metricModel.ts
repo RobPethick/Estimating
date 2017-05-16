@@ -3,11 +3,13 @@ export class MetricModel{
     public percentage;
     public defaultPercentage;
     public pertValue;
+    public rateCode;
 
-    constructor(name, percentage){
+    constructor(name, percentage, rateCode){
         this.name = name;
         this.percentage = percentage;
         this.defaultPercentage = percentage;
+        this.rateCode = rateCode;
     }
 
     get metricValue(){

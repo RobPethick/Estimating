@@ -1,4 +1,5 @@
 import {MetricModel} from './Models/MetricModel';
+import {CustomerModel} from './Models/CustomerModel';
 import {MetricService} from './Services/MetricService';
 import {CustomerService} from './Services/CustomerService';
 import {autoinject} from 'aurelia-framework';
@@ -10,12 +11,17 @@ export class Estimator {
   public mostLikelyEstimate = 0;
   public pessimisticEstimate = 0;
   public selectedCustomer;
-  public metrics;
-  public customers;
+  public metrics = new Array<MetricModel>();
+  public customers = new Array<CustomerModel>();
 
   constructor(private metricService: MetricService, private customerService: CustomerService){
     this.metrics = metricService.getDefaultMetrics();
     this.customers = customerService.getCustomers();
+    this.customers.forEach(customer => {
+      customer.rates.forEach(rate => {
+        rate.metricList = this.metrics;
+      })
+    });
   }
   get pertEstimateText() {
     return this.pertEstimate.toFixed(2).toString();
@@ -60,7 +66,7 @@ export class Estimator {
   }
 
   public addMetric(){
-    this.metrics.push(new MetricModel("New Metric", 0));
+    this.metrics.push(new MetricModel("New Metric", 0, null));
   }
 
   public removeMetric(metric:MetricModel){

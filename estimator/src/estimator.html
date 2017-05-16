@@ -34,16 +34,16 @@
           <span class="metricHeaderValue col-md-1">Amount</span>
           <span class="metricHeaderPercentage col-md-1">Percentage</span>
           <div class="col-md-3"> </div>
-          <span class="metricHeaderDefaultPercentage col-md-3">Default Percentage</span>
+          <span class="metricHeaderDefaultPercentage col-md-3">Default</span>
         </div>
         <div repeat.for="metric of metrics">
           <div class="row form-group">
             <metric metric.bind="metric"></metric>
-            <button class="btn btn-danger  btn-inverse" click.trigger="removeMetric(metric)"><i class="fa fa-trash"></i></button>
+            <button class="btn btn-danger btn-inverse" click.trigger="removeMetric(metric)"><i class="fa fa-trash"></i></button>
           </div>
         </div>
         <div class="row">
-          <button class="btn btn-primary col-md-offset-9" click.trigger="addMetric()"><i class="fa fa-plus"></i></button>
+          <button class="btn btn-primary col-md-offset-11" click.trigger="addMetric()"><i class="fa fa-plus"></i></button>
         </div>
         <div class="form-group">
           <label>Total Time (including metrics):</label>
