@@ -55,10 +55,14 @@
       </section>
     </div>
     <div class="col-lg-6">
-      <div class="resultsSection">
-        <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
-        </textarea>
-        <button class="btn btn-primary" click.trigger="copyTextToClipboard()">Copy</button>
+      <div class="resultsSection row">
+        <div class="col-md-10">
+          <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
+          </textarea>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary" click.trigger="copyTextToClipboard()">Copy</button>
+        </div>
       </div>
     </div>
   </section>
