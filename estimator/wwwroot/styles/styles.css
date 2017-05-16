@@ -9,6 +9,10 @@ textarea {
   overflow: overlay;
 }
 
+[class^="metric"]{
+  padding: 6px 12px;
+}
+
 body {
   margin: 0;
 }

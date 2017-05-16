@@ -1,35 +1,59 @@
 <template>
   <require from="./metric"></require>
   <section class="au-animate">
-    <h2>${heading}</h2>
-    <div class="pertEstimate">
-      <div class="form-group">
-        <label for="fn">Optimistic (h)</label>
-        <input type="number" value.bind="optimisticEstimate" class="form-control" id="fn" placeholder="0">
-      </div>
-      <div class="form-group">
-        <label for="ln">Most Likely (h)</label>
-        <input type="number" value.bind="mostLikelyEstimate" class="form-control" id="ln" placeholder="0">
-      </div>
-      <div class="form-group">
-        <label for="ln">Pessimistic (h)</label>
-        <input type="number" value.bind="pessimisticEstimate" class="form-control" id="ln" placeholder="0">
-      </div>
-      <div class="form-group">
-        <label>PERT (h)</label>
-        <p class="help-block">${pertEstimateText}</p>
-      </div>
+    <h2>Estimating tool</h2>
+    <hr />
+    <div class="col-lg-6 col-md-10 col-md-offset-1 col-lg-offset-0">
+      <section>
+        <h3>PERT Estimate</h3>
+        <div class="pertEstimate row">
+          <div class="form-group col-md-4">
+            <label for="optimistic">Optimistic (h)</label>
+            <input type="number" value.bind="optimisticEstimate" class="form-control" id="optimistic" placeholder="0">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="mostLikely">Most Likely (h)</label>
+            <input type="number" value.bind="mostLikelyEstimate" class="form-control" id="mostLikely" placeholder="0">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="pessimistic">Pessimistic (h)</label>
+            <input type="number" value.bind="pessimisticEstimate" class="form-control" id="pessimistic" placeholder="0">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="pertEstimate">PERT Average(h):</label>
+            <h4 class="help-block" id="pertEstimate">${pertEstimateText}</p>
+          </div>
+        </div>
+      </section>
+      <hr/>
+      <section>
+        <h3>Metrics</h3>
+        <div class="row metricHeader">
+          <span class="metricHeaderName col-md-2">Name</span>
+          <span class="metricHeaderValue col-md-1">Value</span>
+          <span class="metricHeaderPercentage col-md-1">Percentage</span>
+          <div class="col-md-3"> </div>
+          <span class="metricHeaderDefaultPercentage col-md-2">Default Percentage</span>
+        </div>
+        <div repeat.for="metric of metrics">
+          <div class="row form-group">
+            <metric metric.bind="metric"></metric>
+            <button class="btn btn-danger  btn-inverse" click.trigger="removeMetric(metric)"><i class="fa fa-trash"></i></button>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary col-md-offset-9" click.trigger="addMetric()"><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="form-group">
+          <label>Total Time:</label>
+          <h4 class="help-block">${totalTime}</h4>
+        </div>
+      </section>
     </div>
-    <div class="metricsList" repeat.for="metric of metrics">
-      <metric metric.bind="metric"></metric>
-      <button click.trigger="removeMetric(metric)"><i class="fa fa-trash"/></button>
+    <div class="col-lg-6">
+      <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
+      </textarea>
+      <button click.trigger="copyTextToClipboard()">Copy</button>
     </div>
-    <button class="btn btn-primary" click.trigger="addMetric()">Add new metric</button>
-    <div>
-      Total Time: ${totalTime}
-    </div>
-    <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
-    </textarea>
-    <button click.trigger="copyTextToClipboard()">Copy</button>
   </section>
 </template>

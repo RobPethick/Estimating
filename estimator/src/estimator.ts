@@ -34,17 +34,20 @@ export class Estimator {
   }
 
   get nonZeroMetrics(){
-    return this.metrics.every(metric => {return metric.metricValue != 0;})
+    return this.metrics.filter(metric => {return metric.metricValue != 0;})
   }
   
   get descriptionText(){
     var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
-    var metricsLine = "This contains: Development [" + this.pertEstimate + "]"
-    this.metrics.slice(0, -1).forEach(metric=>{
-      metricsLine += ", " + metric.name + " [" + metric.metricValue + "]"
-    })
-    var lastMetric = this.metrics.slice(-1)[0];
-    metricsLine += " and " + lastMetric.name + " [" + lastMetric.metricValue + "]." 
+    var metricsLine = "";
+    if(this.nonZeroMetrics.length > 0){
+      metricsLine = "This contains: Development [" + this.pertEstimateText + "]"
+      this.nonZeroMetrics.slice(0, -1).forEach(metric=>{
+        metricsLine += ", " + metric.name + " [" + metric.metricValue + "]"
+      })
+      var lastMetric = this.nonZeroMetrics.slice(-1)[0];
+      metricsLine += " and " + lastMetric.name + " [" + lastMetric.metricValue + "]." 
+    }
     return introLine + metricsLine;
   }
 
@@ -52,10 +55,16 @@ export class Estimator {
     this.metrics.push(new MetricModel("New Metric", 0));
   }
 
+  public removeMetric(metric:MetricModel){
+    var index = this.metrics.indexOf(metric);
+    this.metrics.splice(index, 1);
+  }
+
   public copyTextToClipboard(){
     var textArea = document.querySelector("#finalText") as HTMLTextAreaElement;
     textArea.select();
     document.execCommand('copy');
+    textArea.selectionEnd = 0;
   }
   public submit() {
     alert(`Welcome, ${this.pertEstimate}!`);
