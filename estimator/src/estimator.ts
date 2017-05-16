@@ -1,5 +1,6 @@
 import {MetricModel} from './Models/MetricModel';
 import {MetricService} from './Services/MetricService';
+import {CustomerService} from './Services/CustomerService';
 import {autoinject} from 'aurelia-framework';
 
 @autoinject
@@ -8,10 +9,13 @@ export class Estimator {
   public optimisticEstimate = 0;
   public mostLikelyEstimate = 0;
   public pessimisticEstimate = 0;
-  public metrics = [new MetricModel("Analysis", 20), new MetricModel("Testing", 50)];
+  public selectedCustomer;
+  public metrics;
+  public customers;
 
-  constructor(private metricService: MetricService){
+  constructor(private metricService: MetricService, private customerService: CustomerService){
     this.metrics = metricService.getDefaultMetrics();
+    this.customers = customerService.getCustomers();
   }
   get pertEstimateText() {
     return this.pertEstimate.toFixed(2).toString();
@@ -49,6 +53,10 @@ export class Estimator {
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]." 
     }
     return introLine + metricsLine;
+  }
+
+  get showCustomerRatesSection(){
+    return this.selectedCustomer != null;
   }
 
   public addMetric(){

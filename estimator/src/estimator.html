@@ -51,7 +51,32 @@
       </section>
       <hr/>
       <section>
-        <h3>Customer Rates</h3>
+        <h3>Customer Rates</h3>     
+        <div class="col-md-4 col-md-offset-8">
+          <select class="form-control" value.bind="selectedCustomer">
+            <option model.bind="null">Choose...</option>
+            <option repeat.for="customer of customers"
+                    model.bind="customer">
+              ${customer.name}
+            </option>
+          </select>
+        </div>   
+        <div class="row" if.bind="showCustomerRatesSection">
+          <div class="col-md-3"></div>
+          <div class="col-md-2">Daily Rate</div>
+          <div class="col-md-2">Hourly Rate</div>
+        </div>
+        <div class="row" repeat.for="rate of selectedCustomer.rates">
+          <div class="col-md-3">
+            ${rate.name}
+          </div>
+          <div class="col-md-2">
+            <input class="form-control" value.bind="rate.ratePerDay"></input>            
+          </div>
+          <div class="col-md-2">
+            £${rate.ratePerHourText}
+          </div>
+        </div>
       </section>
     </div>
     <div class="col-lg-6 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
