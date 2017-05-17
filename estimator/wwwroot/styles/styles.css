@@ -18,6 +18,9 @@ textarea {
 [class^="metric"]{
   padding: 6px 12px;
 }
+.metricDefault{
+  padding-left:0px;
+}
 
 body {
   margin: 0;

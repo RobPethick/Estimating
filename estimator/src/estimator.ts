@@ -65,8 +65,14 @@ export class Estimator {
     return this.selectedCustomer != null;
   }
 
+  get ratesNames(){
+    if(this.selectedCustomer){
+      return this.selectedCustomer.rates;
+    }
+  }
+
   public addMetric(){
-    this.metrics.push(new MetricModel("New Metric", 0, null));
+    this.metrics.push(new MetricModel("New Metric", 0, ));
   }
 
   public removeMetric(metric:MetricModel){
