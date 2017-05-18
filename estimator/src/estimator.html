@@ -61,27 +61,32 @@
             </option>
           </select>
         </div>   
-        <div class="row" if.bind="showCustomerRatesSection">
-          <div class="col-md-3"></div>
-          <div class="col-md-2">Daily Rate</div>
-          <div class="col-md-2">Hourly Rate</div>
-          <div class="col-md-2">Hours</div>
-        </div>
-        <div class="row" repeat.for="rate of selectedCustomer.rates">
-          <div class="col-md-3">
-            ${rate.name}
+        <div if.bind="showCustomerRatesSection">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-2">Daily Rate</div>
+            <div class="col-md-2">Hourly Rate</div>
+            <div class="col-md-2">Hours</div>
           </div>
-          <div class="col-md-2">
-            <input class="form-control" value.bind="rate.ratePerDay"></input>            
+          <div class="row" repeat.for="rate of selectedCustomer.rates">
+            <div class="col-md-3">
+              ${rate.name}
+            </div>
+            <div class="col-md-2">
+              <input class="form-control" value.bind="rate.ratePerDay"></input>            
+            </div>
+            <div class="col-md-2">
+              £${rate.ratePerHourText}
+            </div>
+            <div class="col-md-2">
+              ${rate.hoursOnRateText}
+            </div>
+            <div>
+              £${rate.costText}
+            </div>
           </div>
-          <div class="col-md-2">
-            £${rate.ratePerHourText}
-          </div>
-          <div class="col-md-2">
-            ${rate.hoursOnRateText}
-          </div>
-          <div>
-            ${rate.costText}
+          <div class="row">
+            <div class="col-md-2 col-md-offset-7">£${totalCost}</div>
           </div>
         </div>
       </section>

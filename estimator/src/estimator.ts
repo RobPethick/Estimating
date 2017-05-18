@@ -64,7 +64,7 @@ export class Estimator {
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]." 
     }
     if(this.selectedCustomer){
-      priceLine = "And this costs";
+      priceLine = " The estimated cost is: £" + this.totalCostText;
     }
     return introLine + metricsLine + priceLine;
   }
@@ -77,6 +77,14 @@ export class Estimator {
     if(this.selectedCustomer){
       return this.selectedCustomer.rates;
     }
+  }
+
+  get totalCostText(){
+    var cost = 0;
+    this.selectedCustomer.rates.forEach( rate => {
+      cost += rate.cost;
+    });
+    return cost.toFixed();
   }
 
   public addMetric(){
