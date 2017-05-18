@@ -65,6 +65,7 @@
           <div class="col-md-3"></div>
           <div class="col-md-2">Daily Rate</div>
           <div class="col-md-2">Hourly Rate</div>
+          <div class="col-md-2">Hours</div>
         </div>
         <div class="row" repeat.for="rate of selectedCustomer.rates">
           <div class="col-md-3">
@@ -75,6 +76,12 @@
           </div>
           <div class="col-md-2">
             £${rate.ratePerHourText}
+          </div>
+          <div class="col-md-2">
+            ${rate.hoursOnRateText}
+          </div>
+          <div>
+            ${rate.costText}
           </div>
         </div>
       </section>

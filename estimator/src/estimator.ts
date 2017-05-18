@@ -43,6 +43,10 @@ export class Estimator {
     return totalTime.toFixed(2);
   }
 
+  get metricListWithDev(){
+    return this.metrics.push(new MetricModel("Development", 100, "DT"));
+  }
+
   get nonZeroMetrics(){
     return this.metrics.filter(metric => {return metric.metricValue != 0;})
   }
@@ -50,6 +54,7 @@ export class Estimator {
   get descriptionText(){
     var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
     var metricsLine = "";
+    var priceLine = "";
     if(this.nonZeroMetrics.length > 0){
       metricsLine = "This contains: Development [" + this.pertEstimateText + "]"
       this.nonZeroMetrics.slice(0, -1).forEach(metric=>{
@@ -58,7 +63,10 @@ export class Estimator {
       var lastMetric = this.nonZeroMetrics.slice(-1)[0];
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]." 
     }
-    return introLine + metricsLine;
+    if(this.selectedCustomer){
+      priceLine = "And this costs";
+    }
+    return introLine + metricsLine + priceLine;
   }
 
   get showCustomerRatesSection(){

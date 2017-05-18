@@ -26,6 +26,10 @@ export class RateModel{
         this.ratePerDay = this.originalRatePerDay;
     }
 
+    get hoursOnRateText(){
+        return this.hoursOnRate.toFixed(2);
+    }
+
     get hoursOnRate(){
         var total = 0;
         this.metricList.forEach(metric =>{
@@ -34,5 +38,13 @@ export class RateModel{
             }
         })
         return total;
+    }
+
+    get cost(){
+        return this.hoursOnRate * this.ratePerHour;
+    }
+
+    get costText(){
+        return this.cost.toFixed();
     }
 }
