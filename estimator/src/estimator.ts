@@ -72,7 +72,7 @@ export class Estimator {
   }
 
   public addMetric(){
-    this.metrics.push(new MetricModel("New Metric", 0, ));
+    this.metrics.push(new MetricModel("New Metric", 0, "DT"));
   }
 
   public removeMetric(metric:MetricModel){
