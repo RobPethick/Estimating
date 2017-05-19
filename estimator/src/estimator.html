@@ -37,7 +37,7 @@
         </div>
         <div repeat.for="metric of metrics">
           <div class="row form-group">
-            <metric metric.bind="metric"></metric>
+            <metric metric.bind="metric" rate-codes.bind="rateNames"></metric>
             <button class="btn btn-danger btn-inverse" click.trigger="removeMetric(metric)"><i class="fa fa-trash"></i></button>
           </div>
         </div>
@@ -67,6 +67,7 @@
             <div class="col-md-2">Daily Rate</div>
             <div class="col-md-2">Hourly Rate</div>
             <div class="col-md-2">Hours</div>
+            <div class="col-md-2">Cost</div>
           </div>
           <div class="row" repeat.for="rate of selectedCustomer.rates">
             <div class="col-md-3">

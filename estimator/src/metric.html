@@ -12,6 +12,14 @@
             ${metric.defaultPercentage}%
         </span>
         <button class="btn btn-default" click.trigger="resetDefault()"><i class="fa fa-undo"></i></button>
+    </div>
     <div class="col-md-2">
+        <select class="form-control" value.bind="metric.rateCode">
+            <option model.bind="null">Choose...</option>
+                <option repeat.for="rateCode of ratesNames"
+                        model.bind="rateCode">
+                ${rateCode.name}
+                </option>
+          </select>
     </div>
 </template>
