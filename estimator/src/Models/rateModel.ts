@@ -19,22 +19,22 @@ export class RateModel{
         this.originalRatePerDay = ratePerDay;
     }
 
-    get ratePerHour(){
+    get ratePerHour(): number{
         return this.ratePerDay / 7;
     }
 
-    get ratePerHourText(){
+    get ratePerHourText(): string{
         return this.ratePerHour.toFixed();
     }
 
-    public resetRate(){
+    public resetRate(): void{
         this.ratePerDay = this.originalRatePerDay;
     }
 
-    get hoursOnRate(){
+    get hoursOnRate(): number{
         var total = 0;
         this.metricList.forEach(metric =>{
-            if(metric.rateType == this.rateType.code){
+            if(metric.rateType.code == this.rateType.code){
                 total += metric.metricValue;
             }
         })

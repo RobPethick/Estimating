@@ -1,10 +1,10 @@
 import {RateModel} from '../Models/RateModel';
 
 export class CustomerModel{
-    public name;
-    public rates = new Array<RateModel>();
+    public name: string;
+    public rates: Array<RateModel>;
 
-    constructor(name, rates){
+    constructor(name: string, rates: Array<RateModel>){
         this.name = name;
         this.rates = rates;
     }

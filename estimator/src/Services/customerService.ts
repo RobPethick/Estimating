@@ -3,7 +3,7 @@ import {CustomerModel} from '../Models/CustomerModel';
 import {RateTypeModel} from '../Models/RateTypeModel';
 
 export class CustomerService{
-    public getCustomers(){
+    public getCustomers(): Array<CustomerModel>{
         var rateA = new RateModel(100, null, RateTypeModel.DevTest());
         var rateB = new RateModel(200, null, RateTypeModel.TechnicalConsultant());
         var rateC = new RateModel(250, null, RateTypeModel.LeadTechnicalConsultant());
