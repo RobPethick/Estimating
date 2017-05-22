@@ -3,6 +3,6 @@ import {RateTypeModel} from '../Models/RateTypeModel';
 
 export class MetricService{
     public getDefaultMetrics(){
-        return [new MetricModel("Analysis", 90, new RateTypeModel("DT", "Dev/Test")), new MetricModel("Testing", 90, new RateTypeModel("DT", "Dev/Test"))];
+        return [new MetricModel("Analysis", 90, RateTypeModel.DevTest()), new MetricModel("Testing", 90, RateTypeModel.DevTest())];
     }
 }

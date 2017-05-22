@@ -73,7 +73,7 @@ export class Estimator {
   }
 
   public addMetric(){
-    this.metrics.push(new MetricModel("New Metric", 0, new RateTypeModel("DT", "Dev/Test")));
+    this.metrics.push(new MetricModel("New Metric", 0, RateTypeModel.DevTest()));
   }
 
   public removeMetric(metric:MetricModel){
