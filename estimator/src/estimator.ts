@@ -86,8 +86,4 @@ export class Estimator {
     document.execCommand('copy');
     textArea.selectionEnd = 0;
   }
-  public submit() {
-    alert(`Welcome, ${this.pertEstimate}!`);
-  }
-
 }
