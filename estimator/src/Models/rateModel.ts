@@ -1,15 +1,14 @@
 import {MetricModel} from '../Models/MetricModel';
+import {RateTypeModel} from '../Models/RateTypeModel';
 
 export class RateModel{
-    public code;
-    public name;
-    public ratePerDay;
-    public originalRatePerDay;
-    public metricList = new Array<MetricModel>();
+    public rateType: RateTypeModel;
+    public ratePerDay: number;
+    public originalRatePerDay: number;
+    public metricList: Array<MetricModel>;
 
     constructor(code, name, ratePerDay){
-        this.code = code;
-        this.name = name;
+        this.rateType = new RateTypeModel(code, name);
         this.ratePerDay = ratePerDay;
         this.originalRatePerDay = ratePerDay;
     }
@@ -29,7 +28,7 @@ export class RateModel{
     get hoursOnRate(){
         var total = 0;
         this.metricList.forEach(metric =>{
-            if(metric.rateCode == this.code){
+            if(metric.rateCode == this.rateType.code){
                 total += metric.metricValue;
             }
         })
