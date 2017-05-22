@@ -7,8 +7,14 @@ export class RateModel{
     public originalRatePerDay: number;
     public metricList: Array<MetricModel>;
 
-    constructor(code, name, ratePerDay){
-        this.rateType = new RateTypeModel(code, name);
+    constructor(ratePerDay: number, code: string, rateType: RateTypeModel){
+        if(rateType){
+            this.rateType = rateType;
+        }
+        else{
+            this.rateType = RateTypeModel.GetRateTypeModelFromCode(code);
+        }
+        this.rateType = RateTypeModel.GetRateTypeModelFromCode(code);
         this.ratePerDay = ratePerDay;
         this.originalRatePerDay = ratePerDay;
     }

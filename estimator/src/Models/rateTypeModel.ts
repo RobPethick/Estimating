@@ -21,4 +21,19 @@ export class RateTypeModel{
     static ProjectManager(): RateTypeModel{
         return new RateTypeModel("PM", "Project Manager");
     }
+
+    static GetRateTypeModelFromCode(code: string): RateTypeModel{
+        if(RateTypeModel.DevTest().code == code){
+            return RateTypeModel.DevTest();
+        }
+        if(RateTypeModel.TechnicalConsultant().code == code){
+            return RateTypeModel.TechnicalConsultant();
+        }
+        if(RateTypeModel.LeadTechnicalConsultant().code == code){
+            return RateTypeModel.LeadTechnicalConsultant();
+        }
+        if(RateTypeModel.ProjectManager().code == code){
+            return RateTypeModel.ProjectManager();
+        }
+    }
 }
