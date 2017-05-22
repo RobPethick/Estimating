@@ -10,9 +10,9 @@ export class Estimator {
   public optimisticEstimate = 0;
   public mostLikelyEstimate = 0;
   public pessimisticEstimate = 0;
-  public selectedCustomer;
-  public metrics = new Array<MetricModel>();
-  public customers = new Array<CustomerModel>();
+  public selectedCustomer: CustomerModel;
+  public metrics: Array<MetricModel>;
+  public customers: Array<CustomerModel>;
 
   constructor(private metricService: MetricService, private customerService: CustomerService){
     this.metrics = metricService.getDefaultMetrics();
