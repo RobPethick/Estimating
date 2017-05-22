@@ -28,7 +28,7 @@ export class RateModel{
     get hoursOnRate(){
         var total = 0;
         this.metricList.forEach(metric =>{
-            if(metric.rateCode == this.rateType.code){
+            if(metric.rateType == this.rateType.code){
                 total += metric.metricValue;
             }
         })

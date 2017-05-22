@@ -3,6 +3,7 @@ import {CustomerModel} from './Models/CustomerModel';
 import {MetricService} from './Services/MetricService';
 import {CustomerService} from './Services/CustomerService';
 import {autoinject} from 'aurelia-framework';
+import { RateTypeModel } from "./Models/rateTypeModel";
 
 @autoinject
 export class Estimator {
@@ -72,7 +73,7 @@ export class Estimator {
   }
 
   public addMetric(){
-    this.metrics.push(new MetricModel("New Metric", 0, "DT"));
+    this.metrics.push(new MetricModel("New Metric", 0, new RateTypeModel("DT", "Dev/Test")));
   }
 
   public removeMetric(metric:MetricModel){
