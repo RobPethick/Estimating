@@ -14,7 +14,6 @@ export class RateModel{
         else{
             this.rateType = RateTypeModel.GetRateTypeModelFromCode(code);
         }
-        this.rateType = RateTypeModel.GetRateTypeModelFromCode(code);
         this.ratePerDay = ratePerDay;
         this.originalRatePerDay = ratePerDay;
     }

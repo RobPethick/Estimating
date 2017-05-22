@@ -4,18 +4,19 @@ import {MetricService} from './Services/MetricService';
 import {CustomerService} from './Services/CustomerService';
 import {autoinject} from 'aurelia-framework';
 import { RateTypeModel } from "./Models/rateTypeModel";
+import { RateService } from "./Services/rateService";
 
 @autoinject
 export class Estimator {
   public heading = 'Welcome to the Aurelia Navigation App!';
-  public optimisticEstimate = 0;
-  public mostLikelyEstimate = 0;
-  public pessimisticEstimate = 0;
+  public optimisticEstimate: number = 0;
+  public mostLikelyEstimate: number = 0;
+  public pessimisticEstimate: number = 0;
   public selectedCustomer: CustomerModel;
   public metrics: Array<MetricModel>;
   public customers: Array<CustomerModel>;
 
-  constructor(private metricService: MetricService, private customerService: CustomerService){
+  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService){
     this.metrics = metricService.getDefaultMetrics();
     this.customers = customerService.getCustomers();
     this.customers.forEach(customer => {
@@ -24,11 +25,11 @@ export class Estimator {
       })
     });
   }
-  get pertEstimateText() {
+  get pertEstimateText(): string {
     return this.pertEstimate.toFixed(2).toString();
   }
 
-  get pertEstimate() {
+  get pertEstimate(): number {
     let pertEstimate = (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3
     this.metrics.forEach(metric => {
       metric.pertValue = pertEstimate;
@@ -36,7 +37,7 @@ export class Estimator {
     return pertEstimate;
   }
 
-  get totalTime(){
+  get totalTime(): string{
     var totalTime = this.pertEstimate;
     this.metrics.forEach(metric => {
       totalTime += metric.metricValue
@@ -44,11 +45,11 @@ export class Estimator {
     return totalTime.toFixed(2);
   }
 
-  get nonZeroMetrics(){
+  get nonZeroMetrics(): Array<MetricModel>{
     return this.metrics.filter(metric => {return metric.metricValue != 0;})
   }
   
-  get descriptionText(){
+  get descriptionText(): string{
     var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
     var metricsLine = "";
     if(this.nonZeroMetrics.length > 0){
@@ -62,14 +63,12 @@ export class Estimator {
     return introLine + metricsLine;
   }
 
-  get showCustomerRatesSection(){
+  get showCustomerRatesSection(): boolean{
     return this.selectedCustomer != null;
   }
 
-  get ratesNames(){
-    if(this.selectedCustomer){
-      return this.selectedCustomer.rates;
-    }
+  get ratesNames(): Array<RateTypeModel>{
+    return this.rateService.getRateTypes();
   }
 
   public addMetric(){

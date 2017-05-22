@@ -68,7 +68,7 @@
         </div>
         <div class="row" repeat.for="rate of selectedCustomer.rates">
           <div class="col-md-3">
-            ${rate.name}
+            ${rate.rateType.name}
           </div>
           <div class="col-md-2">
             <input class="form-control" value.bind="rate.ratePerDay"></input>            
