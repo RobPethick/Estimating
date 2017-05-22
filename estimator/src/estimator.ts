@@ -71,16 +71,16 @@ export class Estimator {
     return this.rateService.getRateTypes();
   }
 
-  public addMetric(){
+  public addMetric(): void{
     this.metrics.push(new MetricModel("New Metric", 0, RateTypeModel.DevTest()));
   }
 
-  public removeMetric(metric:MetricModel){
+  public removeMetric(metric:MetricModel): void{
     var index = this.metrics.indexOf(metric);
     this.metrics.splice(index, 1);
   }
 
-  public copyTextToClipboard(){
+  public copyTextToClipboard(): void{
     var textArea = document.querySelector("#finalText") as HTMLTextAreaElement;
     textArea.select();
     document.execCommand('copy');
