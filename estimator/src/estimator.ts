@@ -26,7 +26,7 @@ export class Estimator {
     });
   }
   get pertEstimateText(): string {
-    return this.pertEstimate.toFixed(2).toString();
+    return this.pertEstimate.toFixed(2);
   }
 
   get pertEstimate(): number {
@@ -66,7 +66,7 @@ export class Estimator {
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]." 
     }
     if(this.selectedCustomer){
-      priceLine = " The estimated cost is: �" + this.totalCostText;
+      priceLine = " The estimated cost is: £" + this.totalCostText;
     }
     return introLine + metricsLine + priceLine;
   }
@@ -75,11 +75,11 @@ export class Estimator {
     return this.selectedCustomer != null;
   }
 
-  get ratesNames(): Array<RateTypeModel>{
+  get rateNames(): Array<RateTypeModel>{
     return this.rateService.getRateTypes();
   }
 
-  get totalCostText(){
+  get totalCostText(): string{
     var cost = 0;
     this.selectedCustomer.rates.forEach( rate => {
       cost += rate.cost;

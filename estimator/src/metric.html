@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <input class="metricName form-control" value.bind="metric.name"></input>
     </div>
     <div class="metricValue col-md-1">${metric.trimmedMetricValue}</div>
@@ -16,7 +16,7 @@
     <div class="col-md-2">
         <select class="form-control" value.bind="metric.rateCode">
             <option model.bind="null">Choose...</option>
-                <option repeat.for="rateCode of ratesNames"
+                <option repeat.for="rateCode of rateCodes"
                         model.bind="rateCode">
                 ${rateCode.name}
                 </option>
