@@ -37,18 +37,18 @@ export class RateModel{
     get hoursOnRate(): number{
         var total = 0;
         this.metricList.forEach(metric =>{
-            if(metric.rateType.code == this.rateType.code){
+            if(metric.rateType != null && metric.rateType.code == this.rateType.code){
                 total += metric.metricValue;
             }
         })
         return total;
     }
 
-    get cost(){
+    get cost(): number{
         return this.hoursOnRate * this.ratePerHour;
     }
 
-    get costText(){
+    get costText(): string{
         return this.cost.toFixed();
     }
 }

@@ -15,13 +15,14 @@ export class Estimator {
   public selectedCustomer: CustomerModel;
   public metrics: Array<MetricModel>;
   public customers: Array<CustomerModel>;
+  public devMetric: MetricModel = new MetricModel("Development", 100, RateTypeModel.DevTest());
 
   constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService){
     this.metrics = metricService.getDefaultMetrics();
     this.customers = customerService.getCustomers();
     this.customers.forEach(customer => {
       customer.rates.forEach(rate => {
-        rate.metricList = this.metrics;
+        rate.metricList = this.metricListWithDev;
       })
     });
   }
@@ -34,6 +35,7 @@ export class Estimator {
     this.metrics.forEach(metric => {
       metric.pertValue = pertEstimate;
     });
+    this.devMetric.pertValue = pertEstimate;
     return pertEstimate;
   }
 
@@ -45,8 +47,8 @@ export class Estimator {
     return totalTime.toFixed(2);
   }
 
-  get metricListWithDev(){
-    return this.metrics.push(new MetricModel("Development", 100, RateTypeModel.DevTest()));
+  get metricListWithDev(): Array<MetricModel>{
+    return this.metrics.concat(this.devMetric);
   }
 
   get nonZeroMetrics(): Array<MetricModel>{
@@ -89,6 +91,11 @@ export class Estimator {
 
   public addMetric(): void{
     this.metrics.push(new MetricModel("New Metric", 0, RateTypeModel.DevTest()));
+    this.customers.forEach(customer => {
+      customer.rates.forEach(rate => {
+        rate.metricList = this.metricListWithDev;
+      })
+    });
   }
 
   public removeMetric(metric:MetricModel): void{

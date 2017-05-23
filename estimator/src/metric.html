@@ -14,12 +14,12 @@
         <button class="btn btn-default" click.trigger="resetDefault()"><i class="fa fa-undo"></i></button>
     </div>
     <div class="col-md-2">
-        <select class="form-control" value.bind="metric.rateCode">
+        <select class="form-control" value.bind="metric.rateType" matcher.bind="rateTypeMatcher">
             <option model.bind="null">Choose...</option>
-                <option repeat.for="rateCode of rateCodes"
-                        model.bind="rateCode">
+            <option repeat.for="rateCode of rateCodes"
+                    model.bind="rateCode">
                 ${rateCode.name}
-                </option>
+            </option>
           </select>
     </div>
 </template>
