@@ -1,22 +1,24 @@
-export class MetricModel{
-    public name;
-    public percentage;
-    public defaultPercentage;
-    public pertValue;
-    public rateCode;
+import { RateTypeModel } from "./rateTypeModel";
 
-    constructor(name, percentage, rateCode){
+export class MetricModel {
+    public name: string;
+    public percentage: number;
+    public defaultPercentage:number;
+    public pertValue: number;
+    public rateType: RateTypeModel;
+
+    constructor(name: string, percentage: number, rateType: RateTypeModel){
         this.name = name;
         this.percentage = percentage;
         this.defaultPercentage = percentage;
-        this.rateCode = rateCode;
+        this.rateType = rateType;
     }
 
-    get metricValue(){
+    get metricValue(): number{
         return this.percentage * this.pertValue / 100;
     } 
 
-    get trimmedMetricValue(){
+    get trimmedMetricValue(): string{
         return this.metricValue.toFixed(2);
     }
 }
