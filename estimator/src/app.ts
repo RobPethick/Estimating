@@ -6,8 +6,7 @@ export class App {
   public configureRouter(config: RouterConfiguration, router: Router) {
     config.title = 'Aurelia';
     config.map([
-      { route: ['', 'estimator'], name: 'estimator',      moduleId: 'estimator',      nav: true, title: 'Estimating' },
-      { route: 'users',         name: 'users',        moduleId: 'users',        nav: true, title: 'Github Users' }
+      { route: ['', 'estimator'], name: 'estimator',      moduleId: 'estimator',      nav: true, title: 'Estimating' }
     ]);
 
     this.router = router;
