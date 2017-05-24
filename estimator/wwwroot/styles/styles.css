@@ -6,11 +6,12 @@ textarea {
     position: fixed;
     top:50%;
     transform: translate(0, -50%);
+    width: inherit;
   }
 }
 #finalText{
   resize: none;
-  min-width: 600px;
+  min-width: 100%;
   min-height: 100px;
   width: auto;
 }

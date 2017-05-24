@@ -3,7 +3,7 @@
   <section class="au-animate">
     <h2>Estimating tool</h2>
     <hr />
-    <div class="col-lg-6 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
+    <div class="col-lg-7 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
       <section>
         <h3>PERT Estimate</h3>
         <div class="pertEstimate row">
@@ -51,16 +51,21 @@
       </section>
       <hr/>
       <section>
-        <h3>Customer Rates</h3>     
-        <div class="col-md-4 col-md-offset-8">
-          <select class="form-control" value.bind="selectedCustomer">
-            <option model.bind="null">Choose...</option>
-            <option repeat.for="customer of customers"
-                    model.bind="customer">
-              ${customer.name}
-            </option>
-          </select>
-        </div>   
+        <h3>Customer Rates</h3>   
+        <div class="row">
+          <div class="col-md-3">
+            <label class="pull-right" for="selectCustomer">Selected Customer:</label>   
+          </div>  
+          <div class="col-md-4">
+            <select id="selectCustomer" class="form-control" value.bind="selectedCustomer">
+              <option model.bind="null">Choose...</option>
+              <option repeat.for="customer of customers"
+                      model.bind="customer">
+                ${customer.name}
+              </option>
+            </select>
+          </div>   
+        </div>
         <div if.bind="showCustomerRatesSection">
           <div class="row">
             <div class="col-md-3"></div>
@@ -82,17 +87,20 @@
             <div class="col-md-2">
               ${rate.hoursOnRateText}
             </div>
-            <div>
+            <div class="col-md-2">
               £${rate.costText}
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2 col-md-offset-7">£${totalCost}</div>
+            <div class="col-md-2 col-md-offset-7">
+              <strong class="pull-right">Total:</strong>
+            </div>
+            <div class="col-md-2 ">£${totalCostText}</div>
           </div>
         </div>
       </section>
     </div>
-    <div class="col-lg-6 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
+    <div class="col-lg-5 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
       <div class="resultsSection row">
         <div class="col-md-10">
           <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
