@@ -27,7 +27,23 @@
       </section>
       <hr/>
       <section>
-        <h3>Metrics</h3>
+        <div class="row">
+          <div class="col-md-3">
+            <h3>Metrics</h3>
+          </div>
+          <div class="col-md-2">
+            <label class="pull-right">Select Default:</label>
+          </div>
+          <div class="col-md-3">
+            <select id="selectDefaultMetric" class="form-control" value.bind="selectedDefaultMetric">
+              <option model.bind="null">Choose...</option>
+              <option repeat.for="metricDefault of metricDefaults"
+                      model.bind="metricDefault">
+                ${metricDefault.name}
+              </option>
+            </select>
+          </div>
+        </div>
         <div class="row metricHeader">
           <span class="metricHeaderName col-md-2">Name</span>
           <span class="metricHeaderValue col-md-1">Hours</span>
@@ -51,11 +67,11 @@
       </section>
       <hr/>
       <section>
-        <h3>Customer Rates</h3>   
+        <h3>Customer Rates</h3>
         <div class="row">
           <div class="col-md-3">
-            <label class="pull-right" for="selectCustomer">Selected Customer:</label>   
-          </div>  
+            <label class="pull-right" for="selectCustomer">Selected Customer:</label>
+          </div>
           <div class="col-md-4">
             <select id="selectCustomer" class="form-control" value.bind="selectedCustomer">
               <option model.bind="null">Choose...</option>
@@ -64,7 +80,7 @@
                 ${customer.name}
               </option>
             </select>
-          </div>   
+          </div>
         </div>
         <div if.bind="showCustomerRatesSection">
           <div class="row">
@@ -79,7 +95,7 @@
               ${rate.rateType.name}
             </div>
             <div class="col-md-2">
-              <input class="form-control" value.bind="rate.ratePerDay"></input>            
+              <input class="form-control" value.bind="rate.ratePerDay"></input>
             </div>
             <div class="col-md-2">
               £${rate.ratePerHourText}
@@ -103,7 +119,7 @@
     <div class="col-lg-5 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
       <div class="resultsSection row">
         <div class="col-md-10">
-          <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly" >
+          <textarea id="finalText" textcontent.bind="descriptionText" readonly="readonly">
           </textarea>
         </div>
         <div class="col-md-2">

@@ -1,10 +1,11 @@
-import {MetricModel} from './Models/MetricModel';
-import {CustomerModel} from './Models/CustomerModel';
-import {MetricService} from './Services/MetricService';
-import {CustomerService} from './Services/CustomerService';
-import {autoinject} from 'aurelia-framework';
+import { MetricModel } from './Models/MetricModel';
+import { CustomerModel } from './Models/CustomerModel';
+import { MetricService } from './Services/MetricService';
+import { CustomerService } from './Services/CustomerService';
+import { autoinject } from 'aurelia-framework';
 import { RateTypeModel } from "./Models/rateTypeModel";
 import { RateService } from "./Services/rateService";
+import { MetricDefaultsModel } from "./Models/metricDefaultsModel";
 
 @autoinject
 export class Estimator {
@@ -13,18 +14,16 @@ export class Estimator {
   public mostLikelyEstimate: number = 0;
   public pessimisticEstimate: number = 0;
   public selectedCustomer: CustomerModel;
-  public metrics: Array<MetricModel>;
+  public metricDefaults: Array<MetricDefaultsModel>;
+  public metrics: Array<MetricModel> = [];
   public customers: Array<CustomerModel>;
   public devMetric: MetricModel = new MetricModel("Development", 100, RateTypeModel.DevTest());
 
-  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService){
-    this.metrics = metricService.getDefaultMetrics();
+  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService) {
+    this.metricDefaults = metricService.getDefaultMetrics();
     this.customers = customerService.getCustomers();
-    this.customers.forEach(customer => {
-      customer.rates.forEach(rate => {
-        rate.metricList = this.metricListWithDev;
-      })
-    });
+    this.updateRatesWithMetricModel();
+    this.metrics = this.metricDefaults[0].metrics;
   }
   get pertEstimateText(): string {
     return this.pertEstimate.toFixed(2);
@@ -39,7 +38,7 @@ export class Estimator {
     return pertEstimate;
   }
 
-  get totalTime(): string{
+  get totalTime(): string {
     var totalTime = this.pertEstimate;
     this.metrics.forEach(metric => {
       totalTime += metric.metricValue
@@ -47,49 +46,63 @@ export class Estimator {
     return totalTime.toFixed(2);
   }
 
-  get metricListWithDev(): Array<MetricModel>{
+  get metricListWithDev(): Array<MetricModel> {
     return this.metrics.concat(this.devMetric);
   }
 
-  get nonZeroMetrics(): Array<MetricModel>{
-    return this.metrics.filter(metric => {return metric.metricValue != 0;})
+  get nonZeroMetrics(): Array<MetricModel> {
+    return this.metrics.filter(metric => { return metric.metricValue != 0; })
   }
-  
-  get descriptionText(): string{
+
+  get descriptionText(): string {
     var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
     var metricsLine = "";
     var priceLine = "";
-    if(this.nonZeroMetrics.length > 0){
+    if (this.nonZeroMetrics.length > 0) {
       metricsLine = "This contains: Development [" + this.pertEstimateText + "]"
-      this.nonZeroMetrics.slice(0, -1).forEach(metric=>{
+      this.nonZeroMetrics.slice(0, -1).forEach(metric => {
         metricsLine += ", " + metric.name + " [" + metric.trimmedMetricValue + "]"
       })
       var lastMetric = this.nonZeroMetrics.slice(-1)[0];
-      metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]." 
+      metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]."
     }
-    if(this.selectedCustomer){
+    if (this.selectedCustomer) {
       priceLine = " The estimated cost is: £" + this.totalCostText;
     }
     return introLine + metricsLine + priceLine;
   }
 
-  get showCustomerRatesSection(): boolean{
+  get showCustomerRatesSection(): boolean {
     return this.selectedCustomer != null;
   }
 
-  get rateNames(): Array<RateTypeModel>{
+  get rateNames(): Array<RateTypeModel> {
     return this.rateService.getRateTypes();
   }
 
-  get totalCostText(): string{
+  get totalCostText(): string {
     var cost = 0;
-    this.selectedCustomer.rates.forEach( rate => {
+    this.selectedCustomer.rates.forEach(rate => {
       cost += rate.cost;
     });
     return cost.toFixed();
   }
 
-  public addMetric(): void{
+  set selectedDefaultMetric(defaultMetric: MetricDefaultsModel)
+  {
+    this.metrics = defaultMetric.metrics;
+    this.updateRatesWithMetricModel();
+  } 
+
+  public updateRatesWithMetricModel(){
+      this.customers.forEach(customer => {
+        customer.rates.forEach(rate => {
+          rate.metricList = this.metricListWithDev;
+        })
+      });
+  }
+
+  public addMetric(): void {
     this.metrics.push(new MetricModel("New Metric", 0, RateTypeModel.DevTest()));
     this.customers.forEach(customer => {
       customer.rates.forEach(rate => {
@@ -98,12 +111,12 @@ export class Estimator {
     });
   }
 
-  public removeMetric(metric:MetricModel): void{
+  public removeMetric(metric: MetricModel): void {
     var index = this.metrics.indexOf(metric);
     this.metrics.splice(index, 1);
   }
 
-  public copyTextToClipboard(): void{
+  public copyTextToClipboard(): void {
     var textArea = document.querySelector("#finalText") as HTMLTextAreaElement;
     textArea.select();
     document.execCommand('copy');
