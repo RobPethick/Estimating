@@ -128,6 +128,7 @@ export class Estimator {
   }
 
   public saveAndShare(): void {
-    this.estimateService.Save();
+    this.estimateService.Save(this.estimate)
+      .then(estimateId => alert(estimateId));
   }
 }
