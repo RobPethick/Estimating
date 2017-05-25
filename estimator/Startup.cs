@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
+using estimator.Services;
 
 namespace estimator
 {
@@ -55,6 +56,7 @@ namespace estimator
             services.AddMvc();
 
             // Add application services.
+            services.AddTransient<CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
