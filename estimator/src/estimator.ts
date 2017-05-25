@@ -21,7 +21,8 @@ export class Estimator {
 
   constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService) {
     this.metricDefaults = metricService.getDefaultMetrics();
-    this.customers = customerService.getCustomers();
+    customerService.getCustomers()
+                   .then(customers => this.customers = customers);
     this.selectedDefaultMetric = this.metricDefaults[0];
   }
   get pertEstimateText(): string {
@@ -97,6 +98,9 @@ export class Estimator {
   } 
 
   public updateRatesWithMetricModel(){
+    if(!this.customers){
+      return;
+    }
       this.customers.forEach(customer => {
         customer.rates.forEach(rate => {
           rate.metricList = this.metricListWithDev;

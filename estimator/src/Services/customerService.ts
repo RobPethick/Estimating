@@ -1,13 +1,29 @@
 import { RateModel } from '../Models/RateModel';
 import { CustomerModel } from '../Models/CustomerModel';
 import { RateTypeModel } from '../Models/RateTypeModel';
+import { HttpClient, HttpClientConfiguration, json } from 'aurelia-fetch-client';
 
 export class CustomerService {
-    public getCustomers(): Array<CustomerModel> {
-        var rateA = new RateModel(100, null, RateTypeModel.DevTest());
-        var rateB = new RateModel(200, null, RateTypeModel.TechnicalConsultant());
-        var rateC = new RateModel(250, null, RateTypeModel.LeadTechnicalConsultant());
-        var rateD = new RateModel(200, null, RateTypeModel.ProjectManager());
-        return [new CustomerModel("CustomerA", [rateA, rateB, rateC, rateD]), new CustomerModel("CustomerB", [rateA, rateB, rateC, rateD])];
+    public getCustomers(): Promise<Array<CustomerModel>> {
+        let httpClient = new HttpClient();
+        httpClient.configure(config => {
+            config.useStandardConfiguration()
+                .withBaseUrl('api/');
+        });
+
+        return httpClient.fetch('customers', { method: 'get' })
+            .then(response => response.json())
+            .then(responseJson => {
+                let customers = new Array<CustomerModel>();
+                responseJson as Array<any>;
+                responseJson.forEach(customerJson => {
+                    let customer = new CustomerModel(customerJson.name, []);
+                    customerJson.rates.forEach(rate => {
+                        customer.rates.push(new RateModel(rate.dailyRate, rate.code, null))
+                    });
+                    customers.push(customer);
+                });
+                return customers;
+            });
     }
 }
