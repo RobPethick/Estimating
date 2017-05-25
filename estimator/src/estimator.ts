@@ -6,20 +6,18 @@ import { autoinject } from 'aurelia-framework';
 import { RateTypeModel } from "./Models/rateTypeModel";
 import { RateService } from "./Services/rateService";
 import { MetricDefaultsModel } from "./Models/metricDefaultsModel";
+import { EstimateService } from "./Services/estimateService";
+import { EstimateModel } from "./Models/estimateModel";
 
 @autoinject
 export class Estimator {
   public heading = 'Estimator';
-  public optimisticEstimate: number = 0;
-  public mostLikelyEstimate: number = 0;
-  public pessimisticEstimate: number = 0;
-  public selectedCustomer: CustomerModel;
+  public estimate: EstimateModel = new EstimateModel();
   public metricDefaults: Array<MetricDefaultsModel>;
-  public metrics: Array<MetricModel> = [];
   public customers: Array<CustomerModel>;
   public devMetric: MetricModel = new MetricModel("Development", 100, RateTypeModel.DevTest());
 
-  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService) {
+  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService, private estimateService: EstimateService) {
     this.metricDefaults = metricService.getDefaultMetrics();
     customerService.getCustomers()
                    .then(customers => this.customers = customers);
@@ -30,8 +28,8 @@ export class Estimator {
   }
 
   get pertEstimate(): number {
-    let pertEstimate = (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3
-    this.metrics.forEach(metric => {
+    let pertEstimate = (Number(this.estimate.optimisticEstimate) + Number(this.estimate.mostLikelyEstimate) + Number(this.estimate.pessimisticEstimate)) / 3
+    this.estimate.metrics.forEach(metric => {
       metric.pertValue = pertEstimate;
     });
     this.devMetric.pertValue = pertEstimate;
@@ -40,18 +38,18 @@ export class Estimator {
 
   get totalTime(): string {
     var totalTime = this.pertEstimate;
-    this.metrics.forEach(metric => {
+    this.estimate.metrics.forEach(metric => {
       totalTime += metric.metricValue
     });
     return totalTime.toFixed(2);
   }
 
   get metricListWithDev(): Array<MetricModel> {
-    return this.metrics.concat(this.devMetric);
+    return this.estimate.metrics.concat(this.devMetric);
   }
 
   get nonZeroMetrics(): Array<MetricModel> {
-    return this.metrics.filter(metric => { return metric.metricValue != 0; })
+    return this.estimate.metrics.filter(metric => { return metric.metricValue != 0; })
   }
 
   get descriptionText(): string {
@@ -66,14 +64,14 @@ export class Estimator {
       var lastMetric = this.nonZeroMetrics.slice(-1)[0];
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]."
     }
-    if (this.selectedCustomer) {
+    if (this.estimate.customer) {
       priceLine = " The estimated cost is: £" + this.totalCostText;
     }
     return introLine + metricsLine + priceLine;
   }
 
   get showCustomerRatesSection(): boolean {
-    return this.selectedCustomer != null;
+    return this.estimate.customer != null;
   }
 
   get rateNames(): Array<RateTypeModel> {
@@ -81,11 +79,11 @@ export class Estimator {
   }
 
   get totalCostText(): string {
-    if(!this.selectedCustomer){
+    if(!this.estimate.customer){
       return "";
     }
     var cost = 0;
-    this.selectedCustomer.rates.forEach(rate => {
+    this.estimate.customer.rates.forEach(rate => {
       cost += rate.cost;
     });
     return cost.toFixed();
@@ -93,7 +91,7 @@ export class Estimator {
 
   set selectedDefaultMetric(defaultMetric: MetricDefaultsModel)
   {
-    this.metrics = defaultMetric.metrics;
+    this.estimate.metrics = defaultMetric.metrics;
     this.updateRatesWithMetricModel();
   } 
 
@@ -109,7 +107,7 @@ export class Estimator {
   }
 
   public addMetric(): void {
-    this.metrics.push(new MetricModel("New Metric", 0, RateTypeModel.DevTest()));
+    this.estimate.metrics.push(new MetricModel("New Metric", 0, RateTypeModel.DevTest()));
     this.customers.forEach(customer => {
       customer.rates.forEach(rate => {
         rate.metricList = this.metricListWithDev;
@@ -118,8 +116,8 @@ export class Estimator {
   }
 
   public removeMetric(metric: MetricModel): void {
-    var index = this.metrics.indexOf(metric);
-    this.metrics.splice(index, 1);
+    var index = this.estimate.metrics.indexOf(metric);
+    this.estimate.metrics.splice(index, 1);
   }
 
   public copyTextToClipboard(): void {
@@ -127,5 +125,9 @@ export class Estimator {
     textArea.select();
     document.execCommand('copy');
     textArea.selectionEnd = 0;
+  }
+
+  public saveAndShare(): void {
+    this.estimateService.Save();
   }
 }
