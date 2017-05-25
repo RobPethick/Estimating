@@ -22,8 +22,7 @@ export class Estimator {
   constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService) {
     this.metricDefaults = metricService.getDefaultMetrics();
     this.customers = customerService.getCustomers();
-    this.updateRatesWithMetricModel();
-    this.metrics = this.metricDefaults[0].metrics;
+    this.selectedDefaultMetric = this.metricDefaults[0];
   }
   get pertEstimateText(): string {
     return this.pertEstimate.toFixed(2);
@@ -67,6 +66,7 @@ export class Estimator {
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]."
     }
     if (this.selectedCustomer) {
+      console.log(this.selectedCustomer);
       priceLine = " The estimated cost is: £" + this.totalCostText;
     }
     return introLine + metricsLine + priceLine;
@@ -81,6 +81,9 @@ export class Estimator {
   }
 
   get totalCostText(): string {
+    if(!this.selectedCustomer){
+      return "";
+    }
     var cost = 0;
     this.selectedCustomer.rates.forEach(rate => {
       cost += rate.cost;

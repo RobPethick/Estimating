@@ -36,7 +36,6 @@
           </div>
           <div class="col-md-3">
             <select id="selectDefaultMetric" class="form-control" value.bind="selectedDefaultMetric">
-              <option model.bind="null">Choose...</option>
               <option repeat.for="metricDefault of metricDefaults"
                       model.bind="metricDefault">
                 ${metricDefault.name}
