@@ -27,14 +27,12 @@
       </section>
       <hr/>
       <section>
-        <div class="row">
-          <div class="col-md-3">
             <h3>Metrics</h3>
-          </div>
-          <div class="col-md-2">
+        <div class="row">
+          <div class="col-md-3 col-md-offset-5">
             <label class="pull-right">Select Default:</label>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <select id="selectDefaultMetric" class="form-control" value.bind="selectedDefaultMetric">
               <option repeat.for="metricDefault of metricDefaults"
                       model.bind="metricDefault">
@@ -68,7 +66,7 @@
       <section>
         <h3>Customer Rates</h3>
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-3 col-md-offset-5">
             <label class="pull-right" for="selectCustomer">Selected Customer:</label>
           </div>
           <div class="col-md-4">
