@@ -4,9 +4,9 @@ export class App {
   public router: Router;
 
   public configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Aurelia';
+    config.title = 'Estimator';
     config.map([
-      { route: ['', 'estimator'], name: 'estimator',      moduleId: 'estimator',      nav: true, title: 'Estimating' }
+      { route: ['', 'estimator'], name: 'estimator',      moduleId: 'estimator', nav: true, title: 'Estimator' }
     ]);
 
     this.router = router;
