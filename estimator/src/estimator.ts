@@ -66,7 +66,6 @@ export class Estimator {
       metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]."
     }
     if (this.selectedCustomer) {
-      console.log(this.selectedCustomer);
       priceLine = " The estimated cost is: £" + this.totalCostText;
     }
     return introLine + metricsLine + priceLine;
