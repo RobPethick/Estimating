@@ -18,10 +18,13 @@ export class Estimator {
   public devMetric: MetricModel = new MetricModel("Development", 100, RateTypeModel.DevTest());
 
   constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService, private estimateService: EstimateService) {
-    this.metricDefaults = metricService.getDefaultMetrics();
+    metricService.getDefaultMetrics()
+      .then(metricDefaults => {
+        this.metricDefaults = metricDefaults;
+        this.selectedDefaultMetric = this.metricDefaults[0];
+      });
     customerService.getCustomers()
-                   .then(customers => this.customers = customers);
-    this.selectedDefaultMetric = this.metricDefaults[0];
+      .then(customers => this.customers = customers);
   }
   get pertEstimateText(): string {
     return this.pertEstimate.toFixed(2);
@@ -79,7 +82,7 @@ export class Estimator {
   }
 
   get totalCostText(): string {
-    if(!this.estimate.customer){
+    if (!this.estimate.customer) {
       return "";
     }
     var cost = 0;
@@ -89,21 +92,20 @@ export class Estimator {
     return cost.toFixed();
   }
 
-  set selectedDefaultMetric(defaultMetric: MetricDefaultsModel)
-  {
+  set selectedDefaultMetric(defaultMetric: MetricDefaultsModel) {
     this.estimate.metrics = defaultMetric.metrics;
     this.updateRatesWithMetricModel();
-  } 
+  }
 
-  public updateRatesWithMetricModel(){
-    if(!this.customers){
+  public updateRatesWithMetricModel() {
+    if (!this.customers) {
       return;
     }
-      this.customers.forEach(customer => {
-        customer.rates.forEach(rate => {
-          rate.metricList = this.metricListWithDev;
-        })
-      });
+    this.customers.forEach(customer => {
+      customer.rates.forEach(rate => {
+        rate.metricList = this.metricListWithDev;
+      })
+    });
   }
 
   public addMetric(): void {

@@ -14,7 +14,7 @@ namespace estimator.Controllers
                 new Metric{Name = "Test", DefaultPercentage = 60, RateCode = "DT"},
                 new Metric{Name = "Project Management", DefaultPercentage = 30, RateCode = "PM"}
             };
-            var supportMetricDefaults = new MetricDefaults("Support", supportMetricList);
+            var supportMetricDefaults = new MetricDefaults("Sprint Story", supportMetricList);
 
             
             var projectMetricList = new List<Metric>(){
@@ -22,7 +22,7 @@ namespace estimator.Controllers
                 new Metric{Name = "Test", DefaultPercentage = 60, RateCode = "DT"},
                 new Metric{Name = "Project Management", DefaultPercentage = 30, RateCode = "PM"}
             };
-            var projectMetricDefaults = new MetricDefaults("Project", projectMetricList);
+            var projectMetricDefaults = new MetricDefaults("Support IR", projectMetricList);
             return Json(new []{supportMetricDefaults, projectMetricDefaults});
         }
 
