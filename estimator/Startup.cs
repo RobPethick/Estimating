@@ -7,6 +7,8 @@ using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
 using estimator.Services;
+using estimator.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace estimator
 {
@@ -55,8 +57,13 @@ namespace estimator
 
             services.AddMvc();
 
+            var connection = "Server=.\\Sql2016; Database=Estimator; Trusted_connection=True; ";
+
             // Add application services.
             services.AddTransient<CustomerService>();
+            services.AddDbContext<EstimatorContext>(
+                options => options.UseSqlServer(connection)
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
