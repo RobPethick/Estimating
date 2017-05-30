@@ -1,6 +1,6 @@
 using System;
 
-namespace estimator.Models{
+namespace estimator.web.Models{
     public class Rate{
         public Guid Id { get; set; }
         public string Code { get; set; }

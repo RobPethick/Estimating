@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using estimator.Models;
+using estimator.web.Models;
 using System;
 
-namespace estimator.Controllers
+namespace estimator.web.Controllers
 {
     public class EstimateContoller : Controller
     {

@@ -1,7 +1,7 @@
-using estimator.Models;
+using estimator.web.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace estimator.DataAccess{
+namespace estimator.web.DataAccess{
     public class EstimatorContext: DbContext{
         
         public EstimatorContext(DbContextOptions<EstimatorContext> options): base(options){}

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace estimator.Controllers
+namespace estimator.web.Controllers
 {
     public class HomeController : Controller
     {

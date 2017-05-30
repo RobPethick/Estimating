@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using estimator.Models;
-using estimator.Services;
+using estimator.web.Models;
+using estimator.web.Services;
 
-namespace estimator.Controllers
+namespace estimator.web.Controllers
 {
     public class CustomerContoller : Controller
     {

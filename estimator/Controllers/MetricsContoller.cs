@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using estimator.Models;
+using estimator.web.Models;
 using System.Collections.Generic;
+using estimator.domain;
 
-namespace estimator.Controllers
+namespace estimator.web.Controllers
 {
     public class MetricsContoller : Controller
     {
         [Route("api/metrics")]
         public JsonResult GetMetricDefaults()
         {
+            var service = new MetricsService();
             var supportMetricList = new List<Metric>(){
                 new Metric{Name = "Analysis", DefaultPercentage = 20, RateCode = "DT"},
                 new Metric{Name = "Test", DefaultPercentage = 60, RateCode = "DT"},
