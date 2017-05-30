@@ -6,5 +6,5 @@ export class EstimateModel {
   public mostLikelyEstimate: number = 0;
   public pessimisticEstimate: number = 0;
   public metrics: Array<MetricModel> = [];
-  public customer: CustomerModel;
+  public customer: CustomerModel = null;
 }
