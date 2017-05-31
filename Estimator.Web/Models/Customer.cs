@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace estimator.web.Models
+namespace Estimator.Web.Models
 {
     public class Customer
     {

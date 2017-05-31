@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
-using estimator.web.Services;
-using estimator.web.DataAccess;
+using Estimator.Web.Services;
+using Estimator.Web.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace estimator.web
+namespace Estimator.Web
 {
     public class Startup
     {

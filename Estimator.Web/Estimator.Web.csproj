@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>estimator.web</AssemblyName>
+    <AssemblyName>Estimator.Web</AssemblyName>
     <OutputType>Exe</OutputType>
-    <PackageId>estimator.web</PackageId>
+    <PackageId>Estimator.Web</PackageId>
     <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;dnxcore50;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
