@@ -11,7 +11,7 @@
         <span class="metricDefault">
             ${metric.defaultPercentage}%
         </span>
-        <button class="btn btn-default" click.trigger="resetDefault()"><i class="fa fa-undo"></i></button>
+        <button class="btn btn-xs" click.trigger="resetDefault()"><i class="material-icons">replay</i></button>
     </div>
     <div class="col-md-2">
         <select class="form-control" value.bind="metric.rateType" matcher.bind="rateTypeMatcher">

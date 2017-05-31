@@ -1,13 +1,11 @@
 textarea {
   border: none;
 }
-@media (min-width: 1200px) {
-  .resultsSection{
-    position: fixed;
-    top:50%;
-    transform: translate(0, -50%);
-    width: inherit;
-  }
+.resultsSection{
+  position: fixed;
+  top:50%;
+  transform: translate(0, -50%);
+  width: inherit;
 }
 #finalText{
   resize: none;
@@ -70,9 +68,6 @@ body {
   }
 }
 
-section {
-  margin: 0 20px;
-}
 
 .navbar-nav li.loader {
   margin: 12px 24px 0 6px;

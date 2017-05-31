@@ -13,7 +13,12 @@
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script src="jspm_packages/npm/bluebird@3.4.1/js/browser/bluebird.min.js"></script> 
+    <script src="jspm_packages/npm/jquery@2.2.4/dist/jquery.min.js"></script> 
+    <script src="jspm_packages/npm/bootstrap-material-design@0.5.10/dist/js/material.min.js"></script> 
     <script>
+        $(document).ready(function(){
+            $.material.init();
+        })
         System.import('aurelia-bootstrapper');
     </script>
 </div>
