@@ -58,7 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\estimator.domain\estimator.domain.csproj" />
+    <ProjectReference Include="..\Estimator.Domain\Estimator.Domain.csproj" />
   </ItemGroup>
 
 </Project>

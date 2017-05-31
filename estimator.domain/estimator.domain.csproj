@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp1.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>estimator.domain</AssemblyName>
+    <AssemblyName>Estimator.Domain</AssemblyName>
     <OutputType>library</OutputType>
-    <PackageId>estimator.domain</PackageId>
+    <PackageId>Estimator.Domain</PackageId>
     <RuntimeFrameworkVersion>1.0.4</RuntimeFrameworkVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;dnxcore50;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
