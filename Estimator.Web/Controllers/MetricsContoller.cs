@@ -14,6 +14,7 @@ namespace Estimator.Web.Controllers
             var supportMetricList = new List<Metric>(){
                 new Metric{Name = "Analysis", DefaultPercentage = 20, RateCode = "DT"},
                 new Metric{Name = "Test", DefaultPercentage = 60, RateCode = "DT"},
+                new Metric{Name = "CodeReview", DefaultPercentage = 30, RateCode = "DT"},
                 new Metric{Name = "Project Management", DefaultPercentage = 30, RateCode = "PM"}
             };
             var supportMetricDefaults = new MetricDefaults("Sprint Story", supportMetricList);
