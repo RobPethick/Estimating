@@ -7,19 +7,24 @@
       <section class="card">
         <div class="card-body">
           <h3>PERT Estimate</h3>
-          <div class="pertEstimate row">
-            <div class="form-group col-md-4">
-              <label for="optimistic">Optimistic (h)</label>
-              <input type="number" value.bind="estimate.optimisticEstimate" class="form-control" id="optimistic" placeholder="0">
+          <div class="row">
+            <div class="form-group label-static col-md-4">
+              <label for="optimistic" class="control-label">Optimistic (h)</label>
+              <input class="form-control" value.bind="estimate.optimisticEstimate" id="optimistic" placeholder="0" type="number">
+              <p class="help-block">The best-case scenario</p>
             </div>
-            <div class="form-group col-md-4">
-              <label for="mostLikely">Most Likely (h)</label>
-              <input type="number" value.bind="estimate.mostLikelyEstimate" class="form-control" id="mostLikely" placeholder="0">
+            <div class="form-group label-static col-md-4">
+              <label for="mostLikely" class="control-label">Most Likely (h)</label>
+              <input type="number" value.bind="estimate.mostLikelyEstimate" class="form-control" id="mostLikely" placeholder="0" />
+              <p class="help-block">The most likely scenario</p>
             </div>
-            <div class="form-group col-md-4">
-              <label for="pessimistic">Pessimistic (h)</label>
-              <input type="number" value.bind="estimate.pessimisticEstimate" class="form-control" id="pessimistic" placeholder="0">
+            <div class="form-group label-static col-md-4">
+              <label for="pessimistic" class="control-label">Pessimistic (h)</label>
+              <input type="number" value.bind="estimate.pessimisticEstimate" class="form-control" id="pessimistic" placeholder="0" />
+              <p class="help-block">The worst-case scenario</p>
             </div>
+          </div>
+          <div class="row">
             <div class="form-group">
               <label for="pertEstimate">PERT Average(h):</label>
               <h4 id="pertEstimate">${pertEstimateText}</p>
@@ -91,7 +96,7 @@
             <div class="col-md-2">Hours</div>
             <div class="col-md-2">Cost</div>
           </div>
-          <div class="row" repeat.for="rate of estimate.customer.rates">
+          <div class="row form-group" repeat.for="rate of estimate.customer.rates">
             <div class="col-md-3">
               ${rate.rateType.name}
             </div>
@@ -109,10 +114,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-2 col-md-offset-7">
-              <strong class="pull-right">Total:</strong>
+            <div class="form-group">
+              <label for="pertEstimate">Total:</label>
+              <h4 id="pertEstimate">£${totalCostText}</p>
             </div>
-            <div class="col-md-2 ">£${totalCostText}</div>
           </div>
         </div>
       </section>
