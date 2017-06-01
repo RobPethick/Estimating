@@ -39,7 +39,7 @@ namespace Estimator.Web
                // builder.AddUserSecrets("estimator-typescript-aspnetcore-E0EE09F7-ABEB-45D0-A957-2163DB134112");
 
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
+                //builder.AddApplicationInsightsSettings(developerMode: true);
             }
 
             builder.AddEnvironmentVariables();
@@ -53,7 +53,7 @@ namespace Estimator.Web
         {
             // Add framework services.
 
-            services.AddApplicationInsightsTelemetry(Configuration);
+            //services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
 
@@ -61,9 +61,9 @@ namespace Estimator.Web
 
             // Add application services.
             services.AddTransient<CustomerService>();
-            services.AddDbContext<EstimatorContext>(
-                options => options.UseSqlServer(connection)
-            );
+            // services.AddDbContext<EstimatorContext>(
+            //     options => options.UseSqlServer(connection)
+            // );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
