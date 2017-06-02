@@ -1,6 +1,9 @@
 textarea {
   border: none;
 }
+.top-card{
+  margin-top:32px;
+}
 .resultsSection{
   position: fixed;
   top:50%;
