@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Estimator.Domain.Models
+namespace Estimator.Web.Models
 {
     public class MetricDefaults
     {

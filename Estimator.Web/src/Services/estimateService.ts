@@ -12,7 +12,7 @@ export class EstimateService {
         return httpClient.fetch('estimates',
             {
                 method: 'post',
-                body: json(12)
+                body: json(estimate )
             })
             .then(response => response.json()).then(responseJson => responseJson as number);
     }

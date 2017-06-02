@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Estimator.Domain.Models;
+using Estimator.Web.Models;
 using System.Collections.Generic;
-using Estimator.Domain;
-using Estimator.Domain.Services;
+using Estimator.Web;
+using Estimator.Web.Services;
 
 namespace Estimator.Web.Controllers
 {

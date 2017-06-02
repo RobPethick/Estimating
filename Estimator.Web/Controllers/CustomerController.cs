@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Estimator.Domain.Models;
+using Estimator.Web.Models;
 using Estimator.Web.ApplicationServices;
 
 namespace Estimator.Web.Controllers
