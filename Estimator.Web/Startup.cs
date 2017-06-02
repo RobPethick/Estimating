@@ -64,6 +64,7 @@ namespace Estimator.Web
             // Add application services.
             services.AddTransient<CustomerApplicationService>();
             services.AddTransient<MetricsService>();
+            services.AddTransient<EstimateService>();
             services.AddDbContext<EstimatorContext>(
                 options => options.UseSqlServer(connection)
             );
