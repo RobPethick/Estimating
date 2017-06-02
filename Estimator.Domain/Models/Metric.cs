@@ -1,6 +1,6 @@
 using System;
 
-namespace Estimator.Web.Models
+namespace Estimator.Domain.Models
 {
     public class Metric
     {

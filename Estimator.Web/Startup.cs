@@ -6,9 +6,10 @@ using Microsoft.Extensions.Logging;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
-using Estimator.Web.Services;
-using Estimator.Web.DataAccess;
+using Estimator.Domain.Services;
+using Estimator.Domain.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Estimator.Web.ApplicationServices;
 
 namespace Estimator.Web
 {
@@ -59,8 +60,10 @@ namespace Estimator.Web
 
             var connection = "Server=.\\Sql2016; Database=Estimator; Trusted_connection=True; ";
 
+
             // Add application services.
-            services.AddTransient<CustomerService>();
+            services.AddTransient<CustomerApplicationService>();
+            services.AddTransient<MetricsService>();
             // services.AddDbContext<EstimatorContext>(
             //     options => options.UseSqlServer(connection)
             // );

@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Estimator.Web.Models;
-using Estimator.Web.Services;
+using Estimator.Domain.Models;
+using Estimator.Web.ApplicationServices;
 
 namespace Estimator.Web.Controllers
 {
     public class CustomerContoller : Controller
     {
-        private CustomerService customerService;
-        public CustomerContoller(CustomerService customerService){
+        private CustomerApplicationService customerService;
+        public CustomerContoller(CustomerApplicationService customerService){
             this.customerService = customerService;
         }
 

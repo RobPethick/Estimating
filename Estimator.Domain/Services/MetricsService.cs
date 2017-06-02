@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Estimator.Domain
+namespace Estimator.Domain.Services
 {
     public class MetricsService
     {
