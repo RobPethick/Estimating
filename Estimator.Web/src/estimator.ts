@@ -26,6 +26,12 @@ export class Estimator {
     customerService.getCustomers()
       .then(customers => this.customers = customers);
   }
+
+  public activate(params) {
+    if(params && params.id){
+      console.log(params.id);
+    }
+  }
   get pertEstimateText(): string {
     return this.pertEstimate.toFixed(2);
   }
