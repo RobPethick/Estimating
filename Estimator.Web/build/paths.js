@@ -8,6 +8,7 @@ module.exports = {
   source: appRoot + '**/*.ts',
   html: appRoot + '**/*.html',
   css: appRoot + '**/*.css',
+  dotnet: '**/*.cs',
   style: 'styles/**/*.css',
   output: outputRoot,
 	exportSourceRoot: exportSourceRoot,

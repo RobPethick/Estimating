@@ -9,6 +9,9 @@ var notify = require('gulp-notify');
 var typescript = require('gulp-typescript');
 var exec = require('child_process').exec;
 var htmlmin = require('gulp-htmlmin');
+var server;
+var spawn = require('child_process').spawn;
+var kill = require('tree-kill');
 
 // transpiles changed es6 files to SystemJS format
 // the plumber() call prevents 'pipe breaking' caused
@@ -37,6 +40,23 @@ gulp.task('build-html', function() {
     .pipe(changed(paths.output, {extension: '.html'}))
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest(paths.output));
+});
+
+// recompiles c# code
+gulp.task('build-dotnet', function() {  
+  if (server) {
+    kill(server.pid)
+  }
+
+  server = spawn('dotnet', ['run'], {
+    stdio: 'inherit'
+  })
+
+  server.on('close', function (code) {
+    if (code === 8) {
+      notify.notify('Error detected, waiting for changes...')
+    }
+  })
 });
 
 // copies changed css files to the output directory
