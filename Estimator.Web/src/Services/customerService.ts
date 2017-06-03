@@ -19,7 +19,7 @@ export class CustomerService {
                 responseJson.forEach(customerJson => {
                     let customer = new CustomerModel(customerJson.name, []);
                     customerJson.rates.forEach(rate => {
-                        customer.rates.push(new RateModel(rate.ratePerDay, rate.code, null));
+                        customer.rates.push(new RateModel(rate.ratePerDay, rate.rateCode, null));
                     });
                     customers.push(customer);
                 });
