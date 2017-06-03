@@ -17,4 +17,17 @@ export class EstimateService {
             .then(response => response.json()).then(responseJson => responseJson as string);
     }
 
+    public Get(estimateId: string): Promise<EstimateModel> {
+        let httpClient = new HttpClient();
+        httpClient.configure(config => {
+            config.useStandardConfiguration()
+                .withBaseUrl('api/');
+        });
+
+        return httpClient.fetch('estimates/?id=' + estimateId, {method: 'get'})
+            .then(response => response.json())
+            .then(responseJson => responseJson as EstimateModel);
+
+    }
+
 }

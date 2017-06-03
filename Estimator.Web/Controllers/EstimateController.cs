@@ -2,6 +2,7 @@
 using Estimator.Web.Models;
 using System;
 using Estimator.Web.Services;
+using System.Threading.Tasks;
 
 namespace Estimator.Web.Controllers
 {
@@ -11,8 +12,18 @@ namespace Estimator.Web.Controllers
         public EstimateContoller(EstimateService estimateService){
             this.estimateService = estimateService;
         }
+
+        [HttpGet]
         [Route("api/estimates")]
-        public JsonResult Save([FromBody] Estimate estimate)
+        public async Task<JsonResult> Get(Guid id)
+        {
+            var estimate = await estimateService.Get(id);
+            return Json(estimate);
+        }
+
+        [HttpPost]
+        [Route("api/estimates")]
+        public JsonResult Post([FromBody] Estimate estimate)
         {
             var id = estimateService.Save(estimate);
             return Json(id);

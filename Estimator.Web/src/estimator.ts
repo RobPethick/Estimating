@@ -29,7 +29,10 @@ export class Estimator {
 
   public activate(params) {
     if(params && params.id){
-      console.log(params.id);
+      this.estimateService.Get(params.id)
+        .then(result => {
+          console.log(result);
+        })
     }
   }
   get pertEstimateText(): string {

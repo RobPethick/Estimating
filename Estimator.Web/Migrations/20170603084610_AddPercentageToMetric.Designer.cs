@@ -8,9 +8,10 @@ using Estimator.Web.DataAccess;
 namespace Estimator.Web.Migrations
 {
     [DbContext(typeof(EstimatorContext))]
-    partial class EstimatorContextModelSnapshot : ModelSnapshot
+    [Migration("20170603084610_AddPercentageToMetric")]
+    partial class AddPercentageToMetric
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -91,9 +92,9 @@ namespace Estimator.Web.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("CustomerId");
+                    b.Property<string>("Code");
 
-                    b.Property<string>("RateCode");
+                    b.Property<Guid?>("CustomerId");
 
                     b.Property<double>("RatePerDay");
 

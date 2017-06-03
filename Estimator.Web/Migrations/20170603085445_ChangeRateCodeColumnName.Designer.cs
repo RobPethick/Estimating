@@ -8,9 +8,10 @@ using Estimator.Web.DataAccess;
 namespace Estimator.Web.Migrations
 {
     [DbContext(typeof(EstimatorContext))]
-    partial class EstimatorContextModelSnapshot : ModelSnapshot
+    [Migration("20170603085445_ChangeRateCodeColumnName")]
+    partial class ChangeRateCodeColumnName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

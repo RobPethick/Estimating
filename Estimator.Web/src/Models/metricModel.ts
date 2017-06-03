@@ -5,14 +5,23 @@ export class MetricModel {
     public percentage: number;
     public defaultPercentage: number;
     public pertValue: number;
-    public rateType: RateTypeModel;
+    public rateCode: string;
 
     constructor(name: string, percentage: number, rateType: RateTypeModel) {
         this.name = name;
         this.percentage = percentage;
         this.defaultPercentage = percentage;
-        this.rateType = rateType;
+        this.rateCode = rateType.code;
     }
+    
+    get rateType(): RateTypeModel{
+        return RateTypeModel.GetRateTypeModelFromCode(this.rateCode);
+    }
+
+    set rateType(rateType: RateTypeModel){
+        this.rateCode = rateType.code;
+    }
+
 
     get metricValue(): number {
         return this.percentage * this.pertValue / 100;

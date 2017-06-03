@@ -2,7 +2,7 @@ import {MetricModel} from '../Models/MetricModel';
 import {RateTypeModel} from '../Models/RateTypeModel';
 
 export class RateModel{
-    public rateType: RateTypeModel;
+    public rateCode: string;
     public ratePerDay: number;
     public originalRatePerDay: number;
     public metricList: Array<MetricModel>;
@@ -16,6 +16,14 @@ export class RateModel{
         }
         this.ratePerDay = ratePerDay;
         this.originalRatePerDay = ratePerDay;
+    }
+    
+    get rateType(): RateTypeModel{
+        return RateTypeModel.GetRateTypeModelFromCode(this.rateCode);
+    }
+
+    set rateType(rateType: RateTypeModel){
+        this.rateCode = rateType.code;
     }
 
     get ratePerHour(): number{
