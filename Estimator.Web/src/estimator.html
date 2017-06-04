@@ -38,7 +38,9 @@
           </div>
           <div class="col-md-4">
             <select id="selectDefaultMetric" class="form-control" value.bind="selectedDefaultMetric">
-              <option repeat.for="metricDefault of metricDefaults"
+              <option if.bind="!isNewEstimate" model.bind="loadedMetricSet">${loadedMetricSet.name}</option>
+              <option show.bind="!isNewEstimate" disabled>──────────</option>
+              <option repeat.for="metricDefault of metricDefaults "
                       model.bind="metricDefault">
                 ${metricDefault.name}
               </option>
@@ -75,7 +77,7 @@
             <label class="pull-right" for="selectCustomer">Selected Customer:</label>
           </div>
           <div class="col-md-4">
-            <select id="selectCustomer" class="form-control" value.bind="estimate.customer">
+            <select id="selectCustomer" class="form-control" value.bind="estimate.customer" matcher.bind="customerMatcher">
               <option model.bind="null">Choose...</option>
               <option repeat.for="customer of customers"
                       model.bind="customer">
@@ -84,7 +86,7 @@
             </select>
           </div>
         </div>
-        <div if.bind="showCustomerRatesSection">
+        <div>
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-2">Daily Rate</div>

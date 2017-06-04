@@ -16,8 +16,10 @@ export class Estimator {
   public heading = 'Estimator';
   public estimate: EstimateModel = new EstimateModel();
   public metricDefaults: Array<MetricDefaultsModel>;
+  public loadedMetricSet: MetricDefaultsModel;
   public customers: Array<CustomerModel>;
   public devMetric: MetricModel = new MetricModel("Development", 100, RateTypeModel.DevTest());
+  public customerMatcher = (customerA, customerB) => customerA && customerB && customerA.name === customerB.name;
 
   constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService, private estimateService: EstimateService, private dialogService: DialogService) {
     metricService.getDefaultMetrics()
@@ -30,11 +32,17 @@ export class Estimator {
   }
 
   public activate(params) {
-    if(params && params.id){
+    if (params && params.id) {
       this.estimateService.Get(params.id)
         .then(result => {
+          this.loadedMetricSet = new MetricDefaultsModel("From Estimate", result.metrics);
+          this.selectedDefaultMetric = this.loadedMetricSet;
           this.estimate = result;
-        })
+          this.estimate.metrics.forEach(metric => {
+            metric.pertValue = this.pertEstimate;
+          });
+        });
+      this.updateRatesWithMetricModel;
     }
   }
   get pertEstimateText(): string {
@@ -42,7 +50,7 @@ export class Estimator {
   }
 
   get pertEstimate(): number {
-    let pertEstimate = (Number(this.estimate.optimisticEstimate) + Number(this.estimate.mostLikelyEstimate) + Number(this.estimate.pessimisticEstimate)) / 3
+    let pertEstimate = this.estimate.pertEstimate;
     this.estimate.metrics.forEach(metric => {
       metric.pertValue = pertEstimate;
     });
@@ -65,7 +73,9 @@ export class Estimator {
   get nonZeroMetrics(): Array<MetricModel> {
     return this.estimate.metrics.filter(metric => { return metric.metricValue != 0; })
   }
-
+  get isNewEstimate(): boolean {
+    return this.estimate.id == undefined || this.estimate.id == null || this.estimate.id == "";
+  }
   get descriptionText(): string {
     var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
     var metricsLine = "";
@@ -143,7 +153,7 @@ export class Estimator {
   public saveAndShare(): void {
     this.estimateService.Save(this.estimate)
       .then(estimateId => {
-        this.dialogService.open({viewModel: ShareDialog, model: estimateId, overlayDismiss: true})
+        this.dialogService.open({ viewModel: ShareDialog, model: estimateId, overlayDismiss: true })
       });
   }
 }

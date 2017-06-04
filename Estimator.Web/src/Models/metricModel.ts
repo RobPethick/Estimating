@@ -6,6 +6,7 @@ export class MetricModel {
     public defaultPercentage: number;
     public pertValue: number;
     public rateCode: string;
+    public id: string;
 
     constructor(name: string, percentage: number, rateType: RateTypeModel) {
         this.name = name;

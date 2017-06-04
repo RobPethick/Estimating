@@ -1,6 +1,7 @@
 import { RateModel } from '../Models/RateModel';
 
 export class CustomerModel {
+    public id: string;
     public name: string;
     public rates: Array<RateModel>;
 

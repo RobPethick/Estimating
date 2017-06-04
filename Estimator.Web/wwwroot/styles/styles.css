@@ -16,17 +16,18 @@ textarea {
 textarea {
   resize: none;
   min-width: 100%;
-  min-height: 100px;
+  min-height:90px;
   width: auto;
 }
+
+textarea#shareLink{
+  min-height:40px;
+}
+
 
 ux-dialog-overlay.active {
   background-color: black;
   opacity: .5 !important;
-}
-
-div.modal-dialog{
-  margin-top: 100px;
 }
 
 [class^="metric"] {
