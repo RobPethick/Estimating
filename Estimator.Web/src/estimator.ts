@@ -8,6 +8,8 @@ import { RateService } from "./Services/rateService";
 import { MetricDefaultsModel } from "./Models/metricDefaultsModel";
 import { EstimateService } from "./Services/estimateService";
 import { EstimateModel } from "./Models/estimateModel";
+import { DialogService } from 'aurelia-dialog';
+import { ShareDialog } from "./shareDialog";
 
 @autoinject
 export class Estimator {
@@ -17,7 +19,7 @@ export class Estimator {
   public customers: Array<CustomerModel>;
   public devMetric: MetricModel = new MetricModel("Development", 100, RateTypeModel.DevTest());
 
-  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService, private estimateService: EstimateService) {
+  constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService, private estimateService: EstimateService, private dialogService: DialogService) {
     metricService.getDefaultMetrics()
       .then(metricDefaults => {
         this.metricDefaults = metricDefaults;
@@ -31,7 +33,7 @@ export class Estimator {
     if(params && params.id){
       this.estimateService.Get(params.id)
         .then(result => {
-          console.log(result);
+          this.estimate = result;
         })
     }
   }
@@ -140,6 +142,8 @@ export class Estimator {
 
   public saveAndShare(): void {
     this.estimateService.Save(this.estimate)
-      .then(estimateId => alert(estimateId));
+      .then(estimateId => {
+        this.dialogService.open({viewModel: ShareDialog, model: estimateId})
+      });
   }
 }

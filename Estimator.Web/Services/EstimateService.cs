@@ -16,7 +16,12 @@ namespace Estimator.Web.Services
 
         public Guid Save(Estimate estimate)
         {
-            context.Add(estimate);
+            if(estimate.Id == null || estimate.Id == Guid.Empty){
+                context.Add(estimate);
+            }
+            else{
+                context.Update(estimate);
+            }
             context.SaveChanges();
             return estimate.Id;
         }

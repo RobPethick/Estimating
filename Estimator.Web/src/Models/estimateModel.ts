@@ -7,4 +7,8 @@ export class EstimateModel {
   public pessimisticEstimate: number = 0;
   public metrics: Array<MetricModel> = [];
   public customer: CustomerModel = null;
+  public id: string;
+  get isNewEstimate(): boolean{
+    return this.id != null;
+  }
 }
