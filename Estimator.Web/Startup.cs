@@ -42,7 +42,6 @@ namespace Estimator.Web
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
-
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -58,7 +57,7 @@ namespace Estimator.Web
 
             services.AddMvc();
 
-            var connection = "Server=.\\Sql2016; Database=Estimator; Trusted_connection=True; ";
+            var connection = Configuration["ConnStr"];
 
 
             // Add application services.
@@ -75,23 +74,16 @@ namespace Estimator.Web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-                
                 //This allows you to debug your ts files in browser using the mappings provided by gulp-typescript
                 app.UseStaticFiles(new StaticFileOptions()
                 {
                     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"src")),
                     RequestPath = new PathString("/src")
                 });
-                
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();
