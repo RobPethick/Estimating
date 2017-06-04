@@ -33,7 +33,7 @@ export class Estimator {
 
   public activate(params) {
     if (params && params.id) {
-      this.estimateService.Get(params.id)
+      return this.estimateService.Get(params.id)
         .then(result => {
           this.loadedMetricSet = new MetricDefaultsModel("From Estimate", result.metrics);
           this.selectedDefaultMetric = this.loadedMetricSet;
@@ -41,8 +41,8 @@ export class Estimator {
           this.estimate.metrics.forEach(metric => {
             metric.pertValue = this.pertEstimate;
           });
+          this.updateRatesWithMetricModel();
         });
-      this.updateRatesWithMetricModel;
     }
   }
   get pertEstimateText(): string {
@@ -116,6 +116,15 @@ export class Estimator {
   set selectedDefaultMetric(defaultMetric: MetricDefaultsModel) {
     this.estimate.metrics = defaultMetric.metrics;
     this.updateRatesWithMetricModel();
+  }
+
+  get saveText(): string {
+    if (this.estimate.isNewEstimate) {
+      return "Save & Share";
+    }
+    else {
+      return "Update & Share";
+    }
   }
 
   public updateRatesWithMetricModel() {

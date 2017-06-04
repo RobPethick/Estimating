@@ -1,22 +1,22 @@
 <template>
   <require from="./metric"></require>
   <section class="au-animate">
-    <div class="col-lg-7 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
+    <div class="col-lg-7 col-md-7 col-sm-12">
       <section class="top-card card">
         <div class="card-body">
           <h3>PERT Estimate</h3>
           <div class="row">
-            <div class="form-group label-static col-md-4">
+            <div class="form-group label-static col-sm-4">
               <label for="optimistic" class="control-label">Optimistic (h)</label>
               <input type="number" class="form-control" value.bind="estimate.optimisticEstimate" id="optimistic" placeholder="0" step="0.00000001" min="0">
               <p class="help-block">The most optimistic case where everything goes right</p>
             </div>
-            <div class="form-group label-static col-md-4">
+            <div class="form-group label-static col-sm-4">
               <label for="mostLikely" class="control-label">Most Likely (h)</label>
               <input type="number" value.bind="estimate.mostLikelyEstimate" class="form-control" id="mostLikely" placeholder="0" step="0.00000001" min="0">
               <p class="help-block">The most likely case given normal problems and opportunities</p>
             </div>
-            <div class="form-group label-static col-md-4">
+            <div class="form-group label-static col-sm-4">
               <label for="pessimistic" class="control-label">Pessimistic (h)</label>
               <input type="number" value.bind="estimate.pessimisticEstimate" class="form-control" id="pessimistic" placeholder="0" step="0.00000001" min="0">
               <p class="help-block">The most pessimistic case when everything goes wrong</p>
@@ -33,10 +33,10 @@
       <section class="card">
         <h3>Metrics</h3>
         <div class="row">
-          <div class="col-md-3 col-md-offset-5">
+          <div class="col-sm-3 col-sm-offset-5">
             <label class="pull-right">Select Default:</label>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <select id="selectDefaultMetric" class="form-control" value.bind="selectedDefaultMetric">
               <option if.bind="!isNewEstimate" model.bind="loadedMetricSet">${loadedMetricSet.name}</option>
               <option show.bind="!isNewEstimate" disabled>──────────</option>
@@ -48,11 +48,11 @@
           </div>
         </div>
         <div class="row metricHeader">
-          <span class="metricHeaderName col-md-2">Name</span>
-          <span class="metricHeaderValue col-md-1">Hours</span>
-          <span class="metricHeaderPercentage col-md-1">Percentage</span>
-          <div class="col-md-3"> </div>
-          <span class="metricHeaderDefaultPercentage col-md-1">Default</span>
+          <span class="metricHeaderName col-sm-2">Name</span>
+          <span class="metricHeaderValue col-sm-1">Hours</span>
+          <span class="metricHeaderPercentage col-sm-1">Percentage</span>
+          <div class="col-sm-3"> </div>
+          <span class="metricHeaderDefaultPercentage col-sm-1">Default</span>
         </div>
         <div repeat.for="metric of estimate.metrics">
           <div class="row form-group">
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div>
-          <div class="col-md-offset-11">
+          <div class="col-sm-offset-11">
             <button class="btn btn-primary btn-xs" click.trigger="addMetric()"><i class="material-icons">add</i></button>
           </div>
         </div>
@@ -73,10 +73,10 @@
       <section class="card">
         <h3>Customer Rates</h3>
         <div class="row">
-          <div class="col-md-3 col-md-offset-5">
+          <div class="col-sm-3 col-sm-offset-5">
             <label class="pull-right" for="selectCustomer">Selected Customer:</label>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-4">
             <select id="selectCustomer" class="form-control" value.bind="estimate.customer" matcher.bind="customerMatcher">
               <option model.bind="null">Choose...</option>
               <option repeat.for="customer of customers"
@@ -88,26 +88,26 @@
         </div>
         <div>
           <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-2">Daily Rate</div>
-            <div class="col-md-2">Hourly Rate</div>
-            <div class="col-md-2">Hours</div>
-            <div class="col-md-2">Cost</div>
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">Daily Rate</div>
+            <div class="col-sm-2">Hourly Rate</div>
+            <div class="col-sm-2">Hours</div>
+            <div class="col-sm-2">Cost</div>
           </div>
           <div class="row form-group" repeat.for="rate of estimate.customer.rates">
-            <div class="col-md-3">
+            <div class="col-sm-3">
               ${rate.rateType.name}
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-2">
               <input class="form-control" value.bind="rate.ratePerDay"></input>
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-2">
               £${rate.ratePerHourText}
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-2">
               ${rate.hoursOnRateText}
             </div>
-            <div class="col-md-2">
+            <div class="col-sm-2">
               £${rate.costText}
             </div>
           </div>
@@ -120,7 +120,7 @@
         </div>
       </section>
     </div>
-    <div class="col-lg-5 col-md-10 col-sm-12 col-md-offset-1 col-lg-offset-0 col-sm-offset-0">
+    <div class="col-lg-5 col-md-5 col-sm-12">
       <div class="resultsSection  row">
         <div class="card">
           <div class="card-header">
@@ -132,7 +132,7 @@
           </div>
           <div class="card-footer">
             <button class="btn btn-raised btn-primary" click.trigger="copyTextToClipboard()">Copy</button>
-            <button class="btn btn-raised btn-primary" click.trigger="saveAndShare()">Save & Share</button>
+            <button class="btn btn-raised btn-primary" click.trigger="saveAndShare()">${saveText}</button>
           </div>
         </div>
       </div>

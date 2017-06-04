@@ -1,19 +1,19 @@
 <template>
-    <div class="col-md-2">
+    <div class="col-sm-2">
         <input class="metricName form-control" value.bind="metric.name"></input>
     </div>
-    <div class="metricValue col-md-1">${metric.trimmedMetricValue}</div>
-    <div class="metricPercent col-md-1">${metric.percentage}%</div>
-    <div class="metricRange col-md-3">
+    <div class="metricValue col-sm-1">${metric.trimmedMetricValue}</div>
+    <div class="metricPercent col-sm-1">${metric.percentage}%</div>
+    <div class="metricRange col-sm-3">
         <input min="0" max="150" type="range" value.bind="metric.percentage"> </input>
     </div>
-    <div class="col-md-2">
+    <div class="col-sm-2">
         <span class="metricDefault">
             ${metric.defaultPercentage}%
         </span>
         <button class="btn btn-xs" click.trigger="resetDefault()"><i class="material-icons">replay</i></button>
     </div>
-    <div class="col-md-2">
+    <div class="col-sm-2">
         <select class="form-control" value.bind="metric.rateType" matcher.bind="rateTypeMatcher">
             <option model.bind="null">Choose...</option>
             <option repeat.for="rateCode of rateCodes"
