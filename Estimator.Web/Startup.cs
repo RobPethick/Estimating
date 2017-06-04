@@ -10,6 +10,7 @@ using Estimator.Web.Services;
 using Estimator.Web.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Estimator.Web.ApplicationServices;
+using System;
 
 namespace Estimator.Web
 {
@@ -58,7 +59,9 @@ namespace Estimator.Web
             services.AddMvc();
 
             var connection = Configuration["ConnStr"];
-
+            if(string.IsNullOrEmpty(connection)){
+                connection = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_ConnString");
+            }
 
             // Add application services.
             services.AddTransient<CustomerApplicationService>();
