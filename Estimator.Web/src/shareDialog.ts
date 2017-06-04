@@ -15,4 +15,15 @@ export class ShareDialog{
     get shareUrl(): string{
         return window.location.host + "/#estimate/" + this.estimateId;
     }
+
+    public copyLink(): void{
+        var textArea = document.querySelector("#shareLink") as HTMLTextAreaElement;
+        textArea.select();
+        document.execCommand('copy');
+        textArea.selectionEnd = 0;
+    }
+
+    public close(): void{
+        this.dialogController.close(true);
+    }
 }

@@ -6,8 +6,13 @@
                     <h3>Save and Share</h3>
                 </div>
                 <div class="modal-body">
-                    Share this link to let someone else see your estimate: ${shareUrl}
-                </div> 
+                    Share this link to let someone else see your estimate:
+                    <textarea textcontent.bind="shareUrl" id="shareLink"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-raised btn-primary" click.trigger="copyLink()">Copy</button>
+                    <button class="btn btn-raised btn-danger" click.trigger="close()">Close</button>
+                </div>
             </div>
         </div>
     </div>

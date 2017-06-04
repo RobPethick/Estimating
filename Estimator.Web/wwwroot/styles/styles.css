@@ -13,7 +13,7 @@ textarea {
   width: calc(41.66666667% - 30px);
 }
 
-#finalText {
+textarea {
   resize: none;
   min-width: 100%;
   min-height: 100px;

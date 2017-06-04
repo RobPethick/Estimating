@@ -143,7 +143,7 @@ export class Estimator {
   public saveAndShare(): void {
     this.estimateService.Save(this.estimate)
       .then(estimateId => {
-        this.dialogService.open({viewModel: ShareDialog, model: estimateId})
+        this.dialogService.open({viewModel: ShareDialog, model: estimateId, overlayDismiss: true})
       });
   }
 }
