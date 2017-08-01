@@ -35,11 +35,11 @@ namespace Estimator.Web.Migrations
 
                     b.Property<Guid?>("CustomerId");
 
-                    b.Property<int>("MostLikelyEstimate");
+                    b.Property<decimal>("MostLikelyEstimate");
 
-                    b.Property<int>("OptimisticEstimate");
+                    b.Property<decimal>("OptimisticEstimate");
 
-                    b.Property<int>("PessimisticEstimate");
+                    b.Property<decimal>("PessimisticEstimate");
 
                     b.HasKey("Id");
 

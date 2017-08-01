@@ -58,13 +58,26 @@ export class Estimator {
     return pertEstimate;
   }
 
-  get totalTime(): string {
+  get totalTimeWithoutContingency(): number {
     var totalTime = this.pertEstimate;
     this.estimate.metrics.forEach(metric => {
       totalTime += metric.metricValue
     });
-    return totalTime.toFixed(2);
+    return totalTime;
   }
+
+  get totalTimeWithoutContingencyText(): string {
+    return this.totalTimeWithoutContingency.toFixed(2);
+  }
+
+  get totalTimeWithContingency(): number {
+    return this.totalTimeWithoutContingency + (this.totalTimeWithoutContingency * this.estimate.contingencyPercentage / 100);
+  }
+
+  get totalTimeWithContingencyText(): string {
+    return this.totalTimeWithContingency.toFixed(2);
+  }
+
 
   get metricListWithDev(): Array<MetricModel> {
     return this.estimate.metrics.concat(this.devMetric);
@@ -77,7 +90,7 @@ export class Estimator {
     return this.estimate.id == undefined || this.estimate.id == null || this.estimate.id == "";
   }
   get descriptionText(): string {
-    var introLine = "The time and materials estimate for this work is " + this.totalTime + " hours. ";
+    var introLine = "The time and materials estimate for this work is " + this.totalTimeWithoutContingencyText + " hours. ";
     var metricsLine = "";
     var priceLine = "";
     if (this.nonZeroMetrics.length > 0) {
