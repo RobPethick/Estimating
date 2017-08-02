@@ -22,29 +22,29 @@ export class Estimator {
   public customerMatcher = (customerA, customerB) => customerA && customerB && customerA.name === customerB.name;
 
   constructor(private metricService: MetricService, private customerService: CustomerService, private rateService: RateService, private estimateService: EstimateService, private dialogService: DialogService) {
-    metricService.getDefaultMetrics()
-      .then(metricDefaults => {
-        this.metricDefaults = metricDefaults;
-        this.selectedDefaultMetric = this.metricDefaults[0];
-      });
-    customerService.getCustomers()
-      .then(customers => this.customers = customers);
+
   }
 
-  public activate(params) {
-    if (params && params.id) {
-      return this.estimateService.Get(params.id)
-        .then(result => {
-          this.loadedMetricSet = new MetricDefaultsModel("From Estimate", result.metrics);
-          this.selectedDefaultMetric = this.loadedMetricSet;
-          this.estimate = result;
-          this.estimate.metrics.forEach(metric => {
-            metric.pertValue = this.pertEstimate;
-          });
-          this.updateRatesWithMetricModel();
-        });
-    }
+  public async activate(params) {
+    let metricDefaults = await this.metricService.getDefaultMetrics();
+    this.metricDefaults = metricDefaults;
+    this.selectedDefaultMetric = this.metricDefaults[0];
+    
+    let customers = await this.customerService.getCustomers();    
+    this.customers = customers;
+    if (params && params.id) 
+    {
+      let result = await this.estimateService.Get(params.id);
+      this.loadedMetricSet = new MetricDefaultsModel("From Estimate", result.metrics);
+      this.selectedDefaultMetric = this.loadedMetricSet;
+      this.estimate = result;
+      this.estimate.metrics.forEach(metric => {
+        metric.pertValue = this.pertEstimate;
+      });
+      this.updateRatesWithMetricModel();
+    };
   }
+  
   get pertEstimateText(): string {
     return this.pertEstimate.toFixed(2);
   }
