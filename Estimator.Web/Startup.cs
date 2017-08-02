@@ -99,6 +99,9 @@ namespace Estimator.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var context = app.ApplicationServices.GetService<EstimatorContext>();
+            context.Database.Migrate();
         }
     }
 }
