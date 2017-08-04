@@ -1,0 +1,22 @@
+<template>
+    <div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="top-card card">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr repeat.for="customera of customers">
+                            <td>
+                                ${customera.name}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
