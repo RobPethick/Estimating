@@ -14,7 +14,6 @@ export class EstimateModel {
   }
 
   get pertEstimate(): number{
-    return (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3
-   
+    return (Number(this.optimisticEstimate) + Number(this.mostLikelyEstimate) + Number(this.pessimisticEstimate)) / 3;   
   }
 }

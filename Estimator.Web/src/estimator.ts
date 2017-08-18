@@ -70,8 +70,12 @@ export class Estimator {
     return this.totalTimeWithoutContingency.toFixed(2);
   }
 
+  get contingencyTime(): number{
+    return this.totalTimeWithoutContingency * this.estimate.contingencyPercentage / 100;
+  }
+
   get totalTimeWithContingency(): number {
-    return this.totalTimeWithoutContingency + (this.totalTimeWithoutContingency * this.estimate.contingencyPercentage / 100);
+    return this.totalTimeWithoutContingency + this.contingencyTime;
   }
 
   get totalTimeWithContingencyText(): string {
@@ -90,19 +94,19 @@ export class Estimator {
     return this.estimate.id == undefined || this.estimate.id == null || this.estimate.id == "";
   }
   get descriptionText(): string {
-    var introLine = "The time and materials estimate for this work is " + this.totalTimeWithoutContingencyText + " hours. ";
+    var introLine = `The time and materials estimate for this work is ${this.totalTimeWithoutContingencyText} hours${this.contingencyTime === 0 ? "" : " + " + this.contingencyTime.toFixed(2) + " hours of contingency time"}. `;
     var metricsLine = "";
     var priceLine = "";
     if (this.nonZeroMetrics.length > 0) {
-      metricsLine = "This contains: Development [" + this.pertEstimateText + "]"
+      metricsLine = `This contains: Development [${this.pertEstimateText}]`
       this.nonZeroMetrics.slice(0, -1).forEach(metric => {
-        metricsLine += ", " + metric.name + " [" + metric.trimmedMetricValue + "]"
+        metricsLine += `, ${metric.name} [${metric.trimmedMetricValue}]`
       })
       var lastMetric = this.nonZeroMetrics.slice(-1)[0];
-      metricsLine += " and " + lastMetric.name + " [" + lastMetric.trimmedMetricValue + "]."
+      metricsLine += ` and ${lastMetric.name} [${lastMetric.trimmedMetricValue}].`
     }
     if (this.estimate.customer) {
-      priceLine = " The estimated cost is: £" + this.totalCostText;
+      priceLine = ` The estimated cost is: £${this.totalCost.toFixed()}${this.contingencyCost > 0 ? " + £" + this.contingencyCost.toFixed() + " contingency":""}.`;
     }
     return introLine + metricsLine + priceLine;
   }
@@ -115,15 +119,19 @@ export class Estimator {
     return this.rateService.getRateTypes();
   }
 
-  get totalCostText(): string {
+  get totalCost(): number{
     if (!this.estimate.customer) {
-      return "";
+      return -1;
     }
     var cost = 0;
     this.estimate.customer.rates.forEach(rate => {
       cost += rate.cost;
     });
-    return cost.toFixed();
+    return cost;
+  }
+
+  get contingencyCost(): number{
+    return this.totalCost * this.estimate.contingencyPercentage / 100;
   }
 
   set selectedDefaultMetric(defaultMetric: MetricDefaultsModel) {
