@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "web": {
+    "(Default)": {
       "commandName": "web",
       "environmentVariables": {
         "Hosting:Environment": "Development"
